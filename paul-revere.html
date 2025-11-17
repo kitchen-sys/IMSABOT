@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paul Revere's Midnight Ride - Choose Your Adventure</title>
+    <link rel="stylesheet" href="paul-revere.css">
+</head>
+<body>
+    <!-- Start Screen -->
+    <div id="startScreen" class="screen">
+        <div class="container">
+            <h1>🐴 Paul Revere's Midnight Ride 🐴</h1>
+            <h2>A Choose-Your-Own-Adventure</h2>
+
+            <div class="intro-text">
+                <p><strong>April 18, 1775 - Boston, Massachusetts</strong></p>
+                <p>You are <strong>Paul Revere</strong>, a silversmith and patriot messenger. Tonight, British regulars are preparing to march to Lexington and Concord to seize colonial military supplies and arrest Samuel Adams and John Hancock.</p>
+                <p>Your mission: Ride through the night to warn the countryside that "the regulars are coming out!" Every decision you make could change the course of history.</p>
+
+                <div class="mission-objectives">
+                    <h3>Mission Objectives:</h3>
+                    <ul>
+                        <li>Warn Samuel Adams and John Hancock in Lexington</li>
+                        <li>Alert as many towns as possible</li>
+                        <li>Evade British patrols</li>
+                        <li>Help prevent the seizure of colonial weapons</li>
+                    </ul>
+                </div>
+
+                <p class="historical-note">
+                    ⭐ Based on the true events of April 18-19, 1775, which sparked the American Revolutionary War
+                </p>
+            </div>
+
+            <button class="btn-primary" onclick="game.startGame()">Begin Your Ride!</button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen hidden">
+        <div class="game-header">
+            <div class="stats-panel">
+                <div class="stat">
+                    <span class="stat-label">Round:</span>
+                    <span class="stat-value" id="round">1</span>/10
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Time:</span>
+                    <span class="stat-value" id="time">9:00 PM</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Warnings:</span>
+                    <span class="stat-value" id="warnings">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Risk:</span>
+                    <span class="stat-value" id="risk">Low</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Success:</span>
+                    <span class="stat-value" id="success">0</span>%
+                </div>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <div class="story-panel">
+                <div class="location-header">
+                    <h2 id="locationTitle">Location</h2>
+                </div>
+
+                <div class="story-content">
+                    <div id="storyImage" class="story-image">🏛️</div>
+                    <div id="storyText" class="story-text">
+                        <p>Story text will appear here...</p>
+                    </div>
+                </div>
+
+                <div class="choices-container" id="choicesContainer">
+                    <!-- Choices will be dynamically inserted here -->
+                </div>
+
+                <div class="story-footer">
+                    <div id="consequence" class="consequence hidden">
+                        <!-- Consequences of choices appear here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="journey-map">
+                    <h3>Journey Progress</h3>
+                    <div class="map-container">
+                        <div class="map-locations" id="mapLocations">
+                            <div class="map-point" data-location="boston">📍 Boston</div>
+                            <div class="map-point" data-location="charlestown">⚫ Charlestown</div>
+                            <div class="map-point" data-location="medford">⚫ Medford</div>
+                            <div class="map-point" data-location="lexington">⚫ Lexington</div>
+                            <div class="map-point" data-location="concord">⚫ Concord</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-log">
+                    <h3>Event Log</h3>
+                    <div class="log-messages" id="logMessages">
+                        <div class="log-entry">Your journey begins...</div>
+                    </div>
+                </div>
+
+                <div class="companions-panel">
+                    <h3>Companions</h3>
+                    <div id="companionsList" class="companions-list">
+                        <div class="companion">Just you for now...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Screen -->
+    <div id="endScreen" class="screen hidden">
+        <div class="container">
+            <h1>🌅 Dawn of Revolution 🌅</h1>
+            <h2>April 19, 1775</h2>
+
+            <div class="end-stats">
+                <div class="end-stat">
+                    <span class="end-stat-label">Warnings Delivered:</span>
+                    <span class="end-stat-value" id="finalWarnings">0</span>
+                </div>
+                <div class="end-stat">
+                    <span class="end-stat-label">Mission Success:</span>
+                    <span class="end-stat-value" id="finalSuccess">0%</span>
+                </div>
+                <div class="end-stat">
+                    <span class="end-stat-label">Time Completed:</span>
+                    <span class="end-stat-value" id="finalTime">--</span>
+                </div>
+                <div class="end-stat">
+                    <span class="end-stat-label">Companions:</span>
+                    <span class="end-stat-value" id="finalCompanions">0</span>
+                </div>
+            </div>
+
+            <div id="endMessage" class="end-message">
+                <!-- Final message will be inserted here -->
+            </div>
+
+            <div class="historical-fact">
+                <h3>📜 Historical Facts</h3>
+                <div id="historicalFacts">
+                    <p><strong>The Real Paul Revere:</strong> Paul Revere (1735-1818) was a silversmith, engraver, and patriot who became famous for his midnight ride warning colonists of the approaching British forces.</p>
+                    <p><strong>Two if by sea:</strong> The famous "One if by land, two if by sea" signal lanterns were hung in the Old North Church steeple to warn Charlestown across the river.</p>
+                    <p><strong>Not alone:</strong> William Dawes and Samuel Prescott also rode that night. Prescott was the only one to reach Concord.</p>
+                    <p><strong>The famous phrase:</strong> Revere never actually shouted "The British are coming!" He said "The regulars are coming out!" since colonists still considered themselves British.</p>
+                    <p><strong>Captured:</strong> Paul Revere was actually captured by British patrol on his way to Concord, but his warnings had already spread throughout the countryside.</p>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="location.reload()">Ride Again!</button>
+        </div>
+    </div>
+
+    <script src="paul-revere.js"></script>
+</body>
+</html>

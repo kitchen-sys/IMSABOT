@@ -66,6 +66,17 @@
                 <div class="stat">
                     <span class="stat-label">Level:</span>
                     <span class="stat-value" id="level">1</span>
+                    <div class="xp-progress-container">
+                        <div class="xp-bar-outer">
+                            <div class="xp-bar-fill" id="xpBarFill" style="width: 0%"></div>
+                            <div class="xp-text" id="xpText">0/100 XP</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Roman Knowledge:</span>
+                    <span class="stat-value knowledge-score" id="knowledgeScore">0</span>
+                    <div style="font-size: 0.8em; color: #f4e4c1;">Correct Answers</div>
                 </div>
                 <div class="stat">
                     <span class="stat-label">Gold:</span>
@@ -104,6 +115,26 @@
             <div class="companions-panel">
                 <h3>Companions</h3>
                 <div class="companions-grid" id="companionsGrid"></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="text-align: center; margin: 20px 0; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn-action" onclick="game.showShop()" style="background: linear-gradient(135deg, #8b6914 0%, #daa520 100%); font-size: 1.1em; padding: 12px 25px;">
+                    🏪 Visit Merchant
+                </button>
+                <button class="btn-action" onclick="game.showHorses()" style="background: linear-gradient(135deg, #654321 0%, #8b7355 100%); font-size: 1.1em; padding: 12px 25px;">
+                    🐴 Buy Horse
+                </button>
+                <button class="btn-action" onclick="game.readLetters()" style="background: linear-gradient(135deg, #4a5568 0%, #718096 100%); font-size: 1.1em; padding: 12px 25px;">
+                    📜 Letters from Home
+                </button>
+            </div>
+
+            <!-- Desertion Button (subtle, in corner) -->
+            <div style="position: fixed; bottom: 20px; right: 20px; z-index: 10;">
+                <button onclick="game.desert()" style="background: rgba(60, 20, 20, 0.7); color: #888; border: 1px solid #555; padding: 8px 15px; border-radius: 5px; font-size: 0.85em; cursor: pointer; font-family: 'Georgia', serif; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(80, 20, 20, 0.9)'; this.style.color='#dc143c';" onmouseout="this.style.background='rgba(60, 20, 20, 0.7)'; this.style.color='#888';">
+                    Abandon Legion
+                </button>
             </div>
 
             <div class="main-content">
@@ -162,6 +193,10 @@
                         <span id="finalGold">0</span>
                     </div>
                     <div class="stat-row">
+                        <span>Roman Knowledge Score:</span>
+                        <span id="finalKnowledge" style="color: #ffd700; font-weight: bold;">0</span>
+                    </div>
+                    <div class="stat-row">
                         <span>Questions Answered Correctly:</span>
                         <span id="finalCorrect">0</span>/<span id="finalTotal">0</span>
                     </div>
@@ -188,6 +223,50 @@
                 </div>
 
                 <button class="btn-primary" onclick="location.reload()">Begin New Campaign</button>
+            </div>
+        </div>
+
+        <!-- Shop Modal -->
+        <div class="modal hidden" id="shopModal">
+            <div class="modal-content" style="max-width: 800px;">
+                <h2 style="color: #ffd700; text-align: center; margin-bottom: 20px;">🏪 Merchant's Wares</h2>
+                <p style="text-align: center; margin-bottom: 20px;">Your Gold: <span style="color: #ffd700; font-weight: bold; font-size: 1.3em;" id="shopGold">0</span></p>
+                <div id="shopItems" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;"></div>
+                <button class="btn-primary" onclick="game.closeShop()" style="margin-top: 20px;">Close Shop</button>
+            </div>
+        </div>
+
+        <!-- Horse Modal -->
+        <div class="modal hidden" id="horseModal">
+            <div class="modal-content" style="max-width: 800px;">
+                <h2 style="color: #ffd700; text-align: center; margin-bottom: 20px;">🐴 Horse Trader</h2>
+                <p style="text-align: center; margin-bottom: 10px;">Your Gold: <span style="color: #ffd700; font-weight: bold; font-size: 1.3em;" id="horseGold">0</span></p>
+                <p id="currentHorseDisplay" style="text-align: center; margin-bottom: 20px; color: #4dff4d; font-weight: bold;"></p>
+                <div id="horseItems" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;"></div>
+                <button class="btn-primary" onclick="game.closeHorses()" style="margin-top: 20px;">Close</button>
+            </div>
+        </div>
+
+        <!-- Letters Modal -->
+        <div class="modal hidden" id="lettersModal">
+            <div class="modal-content" style="max-width: 700px;">
+                <h2 style="color: #ffd700; text-align: center; margin-bottom: 20px;">📜 Letters from Home</h2>
+                <p style="text-align: center; margin-bottom: 20px; font-style: italic; color: #f4e4c1;">Messages from your life before the legions...</p>
+                <div id="lettersList" style="display: flex; flex-direction: column; gap: 15px;"></div>
+                <button class="btn-primary" onclick="game.closeLetters()" style="margin-top: 20px;">Close</button>
+            </div>
+        </div>
+
+        <!-- Letter Detail Modal -->
+        <div class="modal hidden" id="letterDetailModal">
+            <div class="modal-content" style="max-width: 600px;">
+                <h2 id="letterTitle" style="color: #ffd700; text-align: center; margin-bottom: 20px;"></h2>
+                <div id="letterContent" style="background: rgba(139, 69, 19, 0.3); padding: 20px; border-radius: 10px; border-left: 5px solid #ffd700; margin-bottom: 20px; white-space: pre-line; line-height: 1.8;"></div>
+                <div id="letterContext" style="background: rgba(40, 20, 10, 0.5); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 3px solid #4dff4d;">
+                    <strong style="color: #4dff4d;">📚 Historical Context:</strong>
+                    <p style="margin-top: 10px; line-height: 1.6;" id="letterContextText"></p>
+                </div>
+                <button class="btn-primary" onclick="game.closeLetterDetail()">Close Letter</button>
             </div>
         </div>
     </div>

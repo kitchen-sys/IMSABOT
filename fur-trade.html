@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rivers of Fortune: French Fur Trade in the Ohio Territory</title>
+    <link rel="stylesheet" href="fur-trade.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Rivers of Fortune</h1>
+            <p class="subtitle">French Fur Trade in the Ohio Territory (1735-1754)</p>
+            <button class="vocab-btn" onclick="game.showVocabulary()">📚 Historical Vocabulary</button>
+        </header>
+
+        <!-- Start Screen -->
+        <div class="game-screen" id="startScreen">
+            <div class="welcome-box">
+                <h2>Bienvenue, Coureur des Bois</h2>
+                <p>The year is 1735. You are a French fur trader venturing into the rich Ohio Territory, known to the French as La Belle Rivière (the Beautiful River). Here, mighty rivers flow with opportunity, and powerful Native American nations control vast hunting grounds.</p>
+                <p><strong>Your Journey:</strong></p>
+                <ul>
+                    <li>Build trust with Native American tribes: Shawnee, Miami, Delaware, and Huron</li>
+                    <li>Trade European goods for valuable furs</li>
+                    <li>Navigate the growing rivalry between France and Britain</li>
+                    <li>Make choices that will shape the path to war</li>
+                    <li>Honor the land and its people while seeking fortune</li>
+                </ul>
+                <p class="instruction">Your choices will determine not only your success as a trader, but also the alliances that will shape the coming conflict known as the French and Indian War.</p>
+                <button class="btn-primary" onclick="game.startGame()">Begin Your Journey</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="game-screen hidden" id="gameScreen">
+            <div class="status-bar">
+                <div class="stat">
+                    <span class="stat-label">Chapter:</span>
+                    <span class="stat-value" id="round">1</span>/10
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Year:</span>
+                    <span class="stat-value" id="year">1735</span>
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">Furs:</span>
+                    <span class="stat-value" id="furs">25</span>
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">French Honor:</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill french-fill" id="frenchFill" style="width: 60%"></div>
+                    </div>
+                    <span class="stat-value" id="french">60</span>
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">Native Trust:</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill native-fill" id="nativeFill" style="width: 50%"></div>
+                    </div>
+                    <span class="stat-value" id="native">50</span>
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">British Threat:</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill threat-fill" id="threatFill" style="width: 20%"></div>
+                    </div>
+                    <span class="stat-value" id="threat">20</span>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="story-panel">
+                    <h2 id="chapterTitle">Chapter Title</h2>
+                    <div class="chapter-year" id="chapterYear">1735</div>
+                    <div class="story-text" id="storyText"></div>
+                </div>
+
+                <div class="trade-panel">
+                    <h3>Trading Goods</h3>
+                    <div class="goods-grid">
+                        <div class="goods-item">
+                            <span class="goods-name">Beaver Pelts:</span>
+                            <span class="goods-qty" id="beaverQty">10</span>
+                        </div>
+                        <div class="goods-item">
+                            <span class="goods-name">Otter Furs:</span>
+                            <span class="goods-qty" id="otterQty">5</span>
+                        </div>
+                        <div class="goods-item">
+                            <span class="goods-name">Deerskins:</span>
+                            <span class="goods-qty" id="deerskinQty">10</span>
+                        </div>
+                        <div class="goods-item">
+                            <span class="goods-name">Trade Goods:</span>
+                            <span class="goods-qty" id="tradeGoodsQty">20</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relationships-panel">
+                    <h3>Tribal Relations</h3>
+                    <div class="relationships-grid" id="relationships">
+                        <div class="relationship-item">
+                            <span class="tribe-name">Shawnee:</span>
+                            <span class="relationship-value">Neutral</span>
+                        </div>
+                        <div class="relationship-item">
+                            <span class="tribe-name">Miami:</span>
+                            <span class="relationship-value">Neutral</span>
+                        </div>
+                        <div class="relationship-item">
+                            <span class="tribe-name">Delaware:</span>
+                            <span class="relationship-value">Neutral</span>
+                        </div>
+                        <div class="relationship-item">
+                            <span class="tribe-name">Huron:</span>
+                            <span class="relationship-value">Friendly</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="choices-panel" id="choicesPanel">
+                    <h3>What will you do?</h3>
+                    <div class="choices" id="choices"></div>
+                </div>
+
+                <div class="result-panel hidden" id="resultPanel">
+                    <div class="result-text" id="resultText"></div>
+                    <button class="btn-advance" onclick="game.nextChapter()">Continue Your Journey →</button>
+                </div>
+
+                <div class="journal-panel">
+                    <h3>Trader's Journal</h3>
+                    <div class="journal-entries" id="journalEntries">
+                        <div class="journal-entry">Your journey into the Ohio Territory begins...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Screen -->
+        <div class="game-screen hidden" id="endScreen">
+            <div class="end-box">
+                <h2>May 28, 1754 - The War Begins</h2>
+                <div id="endMessage"></div>
+                <div class="final-stats">
+                    <h3>Your Legacy</h3>
+                    <p>Total Furs Traded: <span id="finalFurs"></span></p>
+                    <p>French Honor: <span id="finalFrench"></span></p>
+                    <p>Native Trust: <span id="finalNative"></span></p>
+                    <p>British Threat: <span id="finalThreat"></span></p>
+                    <div class="legacy-assessment" id="legacyAssessment"></div>
+                </div>
+                <button class="btn-primary" onclick="location.reload()">Trade Again</button>
+            </div>
+        </div>
+
+        <!-- Vocabulary Modal -->
+        <div class="modal hidden" id="vocabularyModal">
+            <div class="modal-content vocab-modal">
+                <h3>Historical Vocabulary</h3>
+                <p style="font-style: italic; margin-bottom: 20px;">Key terms from the French colonial period and fur trade era</p>
+
+                <div class="vocab-grid">
+                    <div class="vocab-term">
+                        <h4>Coureur des Bois</h4>
+                        <p>French "runner of the woods" - independent fur traders who worked directly with Native Americans, often living among them.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Voyageur</h4>
+                        <p>Licensed French-Canadian canoemen who transported furs and trade goods through wilderness waterways.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>La Belle Rivière</h4>
+                        <p>French name for the Ohio River, meaning "the Beautiful River," central to the fur trade network.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Nouvelle-France</h4>
+                        <p>New France - the French colonial empire in North America, stretching from Canada to Louisiana.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Shawnee</h4>
+                        <p>Powerful Algonquian-speaking tribe in the Ohio Valley, known for their diplomatic skill and military prowess.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Miami</h4>
+                        <p>Algonquian tribe controlling key portages and trade routes in the western Ohio Territory and Great Lakes region.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Delaware (Lenape)</h4>
+                        <p>Eastern Algonquian people pushed westward by British colonization, seeking new alliances in Ohio.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Huron (Wendat)</h4>
+                        <p>Long-standing French allies from the Great Lakes, experienced traders and middlemen in the fur trade.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Beaver Pelt</h4>
+                        <p>Most valuable fur in the trade, used for making felt hats in Europe. Nearly caused beaver extinction in some regions.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Trade Goods</h4>
+                        <p>European items traded for furs: metal tools, guns, cloth, beads, kettles, and blankets.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Fort Duquesne</h4>
+                        <p>French fort built at the Forks of the Ohio (modern Pittsburgh), strategic point controlling river access.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Ohio Company</h4>
+                        <p>British land speculation company granted 200,000 acres in Ohio, threatening French claims and Native lands.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Iroquois Confederacy</h4>
+                        <p>Powerful alliance of six nations holding nominal claims to Ohio, playing French and British against each other.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Calumet</h4>
+                        <p>Sacred ceremonial pipe used in Native American diplomacy and peace negotiations.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Wampum</h4>
+                        <p>Shell beads used as currency, records, and diplomatic gifts in Native American and colonial trade.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Portage</h4>
+                        <p>Carrying canoes and goods overland between waterways - critical points controlled by Native tribes.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>French and Indian War</h4>
+                        <p>North American theater of the Seven Years' War (1754-1763) between Britain and France for continental control.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Fort Necessity</h4>
+                        <p>Hastily built British fort where young George Washington surrendered to French forces in July 1754.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Troupes de la Marine</h4>
+                        <p>French colonial regular troops who garrisoned forts and fought alongside Native allies.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Half King</h4>
+                        <p>Title for Tanacharison, Seneca leader who attempted to maintain Iroquois influence in Ohio during colonial conflicts.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Métis</h4>
+                        <p>People of mixed French and Native American ancestry, often serving as cultural intermediaries and traders.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Rendezvous</h4>
+                        <p>Annual gathering where traders, trappers, and Native peoples met to exchange furs, goods, and news.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Albany Plan</h4>
+                        <p>1754 proposal by Benjamin Franklin for colonial unity, partly in response to French expansion in Ohio.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Treaty of Logstown</h4>
+                        <p>1752 agreement where some Ohio tribes granted British trading rights, causing division and resentment.</p>
+                    </div>
+                </div>
+
+                <button class="btn-secondary" onclick="game.closeModal()" style="margin-top: 20px; width: 100%;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="fur-trade.js"></script>
+</body>
+</html>

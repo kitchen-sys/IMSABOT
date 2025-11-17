@@ -68,6 +68,7 @@ const game = {
             question: "Which brothers allegedly founded Rome?",
             answers: ["Romulus and Remus", "Castor and Pollux"],
             correct: 0,
+            difficulty: "easy",
             explanation: "According to Roman mythology, twin brothers Romulus and Remus founded Rome. Romulus killed Remus in a dispute and became Rome's first king. Castor and Pollux were different mythological twins."
         },
         {
@@ -75,6 +76,7 @@ const game = {
             answers: ["Curia", "Forum"],
             correct: 0,
             explanation: "The Curia was the meeting house of the Roman Senate. The Forum was the public plaza where the Curia was located, but it wasn't the building itself."
+            difficulty: "easy",
         },
         {
             question: "How many men were in a full Roman legion?",
@@ -82,6 +84,7 @@ const game = {
             correct: 0,
             explanation: "A full-strength Roman legion contained approximately 5,000 soldiers (4,800 infantry plus 120 cavalry). This made the legion large enough to be powerful but small enough to move quickly."
         },
+            difficulty: "easy",
         {
             question: "The Punic Wars were fought against:",
             answers: ["Carthage", "Greece"],
@@ -89,6 +92,7 @@ const game = {
             explanation: "The three Punic Wars (264-146 BCE) were fought between Rome and Carthage, a powerful North African city. The most famous Carthaginian general was Hannibal, who crossed the Alps with elephants to invade Italy."
         },
         {
+            difficulty: "easy",
             question: "A Roman soldier's standard sword was called a:",
             answers: ["Gladius", "Spatha"],
             correct: 0,
@@ -96,6 +100,7 @@ const game = {
         },
         {
             question: "The Roman shield was called a:",
+            difficulty: "easy",
             answers: ["Scutum", "Aspis"],
             correct: 0,
             explanation: "The scutum was the large rectangular shield used by Roman legionaries. It was curved to protect the body and could be used to push enemies. The aspis was a round Greek shield."
@@ -103,6 +108,7 @@ const game = {
         {
             question: "Julius Caesar crossed which river to start the civil war?",
             answers: ["The Rubicon", "The Tiber"],
+            difficulty: "easy",
             correct: 0,
             explanation: "In 49 BCE, Caesar crossed the Rubicon River with his army, defying the Senate's order. This act started a civil war. 'Crossing the Rubicon' still means passing a point of no return. The Tiber flows through Rome."
         },
@@ -110,6 +116,7 @@ const game = {
             question: "How long did a Roman soldier serve in the legions?",
             answers: ["25 years", "10 years"],
             correct: 0,
+            difficulty: "easy",
             explanation: "Roman legionaries signed up for 25 years of service! After completing their service, they received land or money as a pension. This long service created very experienced, professional soldiers."
         },
         {
@@ -117,6 +124,7 @@ const game = {
             answers: ["Mars", "Jupiter"],
             correct: 0,
             explanation: "Mars was the Roman god of war and the father of Romulus and Remus. Romans believed they were descendants of Mars, making war part of their identity. Jupiter was the king of the gods."
+            difficulty: "easy",
         },
         {
             question: "The Colosseum was built by which dynasty?",
@@ -124,6 +132,7 @@ const game = {
             correct: 0,
             explanation: "The Flavian dynasty (Vespasian and his sons Titus and Domitian) built the Colosseum starting in 70 CE. It could hold 50,000 spectators for gladiator fights and other events!"
         },
+            difficulty: "easy",
         {
             question: "Hannibal crossed the Alps with:",
             answers: ["Elephants", "Cavalry only"],
@@ -131,6 +140,7 @@ const game = {
             explanation: "Hannibal famously crossed the Alps with 37 war elephants in 218 BCE to attack Italy. Most elephants died in the mountains, but this bold move shocked Rome and is still studied by military historians today."
         },
         {
+            difficulty: "easy",
             question: "The Roman Republic ended in:",
             answers: ["27 BCE", "44 BCE"],
             correct: 0,
@@ -138,6 +148,7 @@ const game = {
         },
         {
             question: "The chief Roman god was:",
+            difficulty: "easy",
             answers: ["Jupiter", "Mars"],
             correct: 0,
             explanation: "Jupiter was king of the Roman gods, ruling the sky and thunder (like Greek Zeus). Mars was the god of war. Romans swore oaths 'by Jupiter' and built great temples to honor him."
@@ -145,6 +156,7 @@ const game = {
         {
             question: "Roman heavy infantry armor was called:",
             answers: ["Lorica Segmentata", "Lorica Hamata"],
+            difficulty: "easy",
             correct: 0,
             explanation: "Lorica Segmentata was the iconic segmented plate armor you see in movies. It was made of iron strips that protected well while allowing movement. Lorica Hamata was chainmail armor."
         },
@@ -152,6 +164,7 @@ const game = {
             question: "The Gallic Wars lasted:",
             answers: ["8 years (58-50 BCE)", "5 years"],
             correct: 0,
+            difficulty: "easy",
             explanation: "Julius Caesar's conquest of Gaul took 8 years from 58-50 BCE. He wrote a famous book about these wars called 'Commentarii de Bello Gallico' (Commentaries on the Gallic War) that students still read today!"
         },
         {
@@ -159,6 +172,7 @@ const game = {
             answers: ["The Ides of March (March 15)", "The Kalends of May"],
             correct: 0,
             explanation: "Julius Caesar was murdered on March 15, 44 BCE - the 'Ides of March' in the Roman calendar. He was stabbed 23 times by senators who feared he had too much power. Shakespeare made this date famous in his play."
+            difficulty: "easy",
         },
         {
             question: "A Roman military unit of 80 men was called a:",
@@ -166,6 +180,7 @@ const game = {
             correct: 0,
             explanation: "A century was a unit of about 80 soldiers led by a centurion. Despite the name suggesting 100, centuries typically had 80 men. Six centuries made a cohort, and ten cohorts made a legion."
         },
+            difficulty: "easy",
         {
             question: "The Roman goddess of wisdom was:",
             answers: ["Minerva", "Venus"],
@@ -173,6 +188,7 @@ const game = {
             explanation: "Minerva was the goddess of wisdom, strategic warfare, and crafts (similar to Greek Athena). Venus was the goddess of love and beauty. Both were important in Roman religion and mythology."
         },
         {
+            difficulty: "easy",
             question: "The Praetorian Guard protected:",
             answers: ["The Emperor", "The Senate"],
             correct: 0,
@@ -180,6 +196,7 @@ const game = {
         },
         {
             question: "Roman soldiers built this defensive structure in Britain:",
+            difficulty: "easy",
             answers: ["Hadrian's Wall", "Antonine Wall"],
             correct: 0,
             explanation: "Hadrian's Wall (built 122 CE) is the most famous, stretching 73 miles across northern England to keep out Scottish tribes. The Antonine Wall was built later and farther north but was abandoned. You can still visit Hadrian's Wall today!"
@@ -187,6 +204,7 @@ const game = {
         {
             question: "The Roman messenger god was:",
             answers: ["Mercury", "Apollo"],
+            difficulty: "easy",
             correct: 0,
             explanation: "Mercury was the speedy messenger of the gods, with winged sandals to fly between heaven and earth. He was also the god of commerce and travelers. Apollo was the god of the sun, music, and prophecy."
         },
@@ -194,6 +212,7 @@ const game = {
             question: "Spartacus led a revolt of:",
             answers: ["Gladiators and slaves", "Gauls"],
             correct: 0,
+            difficulty: "easy",
             explanation: "In 73 BCE, Spartacus led the largest slave rebellion in Roman history! He and other gladiators escaped and built an army of 70,000 escaped slaves. Though they won many battles, Rome eventually defeated them in 71 BCE."
         },
         {
@@ -201,6 +220,7 @@ const game = {
             answers: ["Julius Caesar", "Vercingetorix"],
             correct: 0,
             explanation: "In 52 BCE, Caesar won a brilliant victory at Alesia by building two walls - one to trap the Gauls inside, another to protect his army from relief forces. This victory ended major Gallic resistance and made Caesar famous."
+            difficulty: "easy",
         },
         {
             question: "A Roman centurion commanded:",
@@ -224,7 +244,150 @@ const game = {
             question: "Roman roads were famous for being:",
             answers: ["Straight and durable", "Wide but poorly maintained"],
             correct: 0,
+            difficulty: "easy",
             explanation: "Roman roads were engineering marvels - built straight as arrows with layers of stone, gravel, and pavement. They lasted for centuries! Some Roman roads in Europe are still used today, 2,000 years later. All roads led to Rome!"
+        },
+        // MEDIUM QUESTIONS (Rounds 8-13)
+        {
+            question: "What language did educated Romans speak besides Latin?",
+            answers: ["Greek", "Egyptian"],
+            correct: 0,
+            difficulty: "medium",
+            explanation: "Greek was the language of culture and education. Elite Romans studied Greek literature, philosophy, and rhetoric. Many Roman writers like Cicero wrote in both Latin and Greek!"
+        },
+        {
+            question: "The Roman bath complex was called:",
+            answers: ["Thermae", "Basilica"],
+            correct: 0,
+            difficulty: "medium",
+            explanation: "Thermae were large public bath complexes with hot, warm, and cold pools. Romans bathed daily for hygiene and socializing. Baths also had libraries, exercise areas, and gardens!"
+        },
+        {
+            question: "Roman concrete was made with:",
+            answers: ["Volcanic ash", "Crushed marble"],
+            correct: 0,
+            difficulty: "medium",
+            explanation: "Romans mixed volcanic ash (pozzolana) with lime to create incredibly strong concrete that could even set underwater! This is why Roman buildings like the Pantheon still stand 2,000 years later."
+        },
+        {
+            question: "A Roman villa was:",
+            answers: ["A country estate", "A city apartment"],
+            correct: 0,
+            difficulty: "medium",
+            explanation: "Villas were luxurious country estates owned by wealthy Romans. They had farms, gardens, baths, and beautiful architecture. City apartments were called 'insulae'."
+        },
+        {
+            question: "The Roman entertainment building for chariot races was:",
+            answers: ["Circus Maximus", "Colosseum"],
+            correct: 0,
+            difficulty: "medium",
+            explanation: "The Circus Maximus could hold 250,000 spectators for chariot races! It was the largest entertainment venue ever built. The Colosseum was for gladiator fights and other spectacles."
+        },
+        {
+            question: "Roman numerals use these letters:",
+            answers: ["I, V, X, L, C, D, M", "A, B, C, D, E, F, G"],
+            correct: 0,
+            difficulty: "medium",
+            explanation: "Roman numerals use I=1, V=5, X=10, L=50, C=100, D=500, M=1,000. For example, XIV = 14 and MMXXV = 2025. This system was used throughout the Roman Empire!"
+        },
+        {
+            question: "Gauls were Celtic people who lived in:",
+            answers: ["Modern France and Belgium", "Modern Greece"],
+            correct: 0,
+            difficulty: "medium",
+            explanation: "The Gauls inhabited most of modern France, Belgium, and parts of Germany. They were divided into many tribes with their own territories. The Romans called this region 'Gallia' (Gaul)."
+        },
+        {
+            question: "Roman legionaries wore this under their armor:",
+            answers: ["A red tunic", "A white toga"],
+            correct: 0,
+            difficulty: "medium",
+            explanation: "Legionaries wore a knee-length red wool tunic under their armor. Togas were formal civilian clothing worn by Roman citizens, not soldiers in the field!"
+        },
+        {
+            question: "The Roman unit larger than a century was:",
+            answers: ["A Cohort (480 men)", "A Maniple (120 men)"],
+            correct: 0,
+            difficulty: "medium",
+            explanation: "A cohort consisted of 6 centuries (about 480 men). Ten cohorts made a legion. The cohort was the primary tactical unit that could operate independently."
+        },
+        {
+            question: "Romans conquered Britain starting in:",
+            answers: ["43 CE under Emperor Claudius", "55 BCE under Julius Caesar"],
+            correct: 0,
+            difficulty: "medium",
+            explanation: "While Caesar invaded Britain twice (55-54 BCE), the real conquest began in 43 CE when Emperor Claudius sent four legions. Britain remained Roman for nearly 400 years!"
+        },
+        // HARD QUESTIONS (Rounds 14-20)
+        {
+            question: "The Roman military tactic of surrounding an enemy was called:",
+            answers: ["Circumvallation", "Decimation"],
+            correct: 0,
+            difficulty: "hard",
+            explanation: "Circumvallation meant building walls to surround an enemy position. Caesar famously used this at Alesia, building two walls - one facing in, one facing out. Decimation was a punishment where every 10th soldier was executed."
+        },
+        {
+            question: "The crisis of the Third Century saw how many emperors?",
+            answers: ["Over 50 emperors in 50 years", "5 emperors"],
+            correct: 0,
+            difficulty: "hard",
+            explanation: "From 235-284 CE, over 50 men claimed to be emperor! Most were assassinated within months. This period of chaos nearly destroyed Rome before Diocletian restored order."
+        },
+        {
+            question: "Roman soldiers carried supplies for how many days?",
+            answers: ["16 days worth", "3 days worth"],
+            correct: 0,
+            difficulty: "hard",
+            explanation: "Each legionary carried about 60 pounds of gear including 16 days of rations, armor, weapons, tools, and equipment. They were called 'Marius' mules' after General Marius who required this."
+        },
+        {
+            question: "The Roman testudo formation involved:",
+            answers: ["Shields locked overhead and on sides", "Soldiers in a wedge shape"],
+            correct: 0,
+            difficulty: "hard",
+            explanation: "Testudo ('tortoise') had soldiers lock shields overhead and on all sides, creating a protective shell. This defended against arrows and projectiles during sieges. It was nearly impenetrable!"
+        },
+        {
+            question: "Which emperor split the Roman Empire in two?",
+            answers: ["Diocletian", "Constantine"],
+            correct: 0,
+            difficulty: "hard",
+            explanation: "Diocletian (284-305 CE) divided the empire into Eastern and Western halves with separate emperors to make it easier to govern and defend. Constantine later reunited it temporarily."
+        },
+        {
+            question: "The Marian Reforms made Roman soldiers:",
+            answers: ["Professional paid troops", "Citizen militia only"],
+            correct: 0,
+            difficulty: "hard",
+            explanation: "General Gaius Marius (107 BCE) reformed the army, allowing non-landowners to join as professional paid soldiers. This created the legendary Roman legions that conquered the Mediterranean world!"
+        },
+        {
+            question: "Roman pilum javelins were designed to:",
+            answers: ["Bend on impact", "Pierce multiple enemies"],
+            correct: 0,
+            difficulty: "hard",
+            explanation: "The pilum's iron shaft bent when it hit a shield, making the shield unusable and preventing enemies from throwing it back. This clever design gave Romans a huge advantage in battle!"
+        },
+        {
+            question: "The Roman grain dole provided free food to:",
+            answers: ["Over 200,000 citizens", "Only soldiers"],
+            correct: 0,
+            difficulty: "hard",
+            explanation: "By Caesar's time, over 320,000 Roman citizens received free grain! Later emperors reduced this to about 200,000. This kept the poor fed and politically stable - 'bread and circuses'!"
+        },
+        {
+            question: "Gaius Julius Caesar was assassinated by:",
+            answers: ["A group of 60 senators", "A single assassin"],
+            correct: 0,
+            difficulty: "hard",
+            explanation: "Over 60 senators participated in Caesar's assassination! They stabbed him 23 times on the Senate floor. The conspiracy was led by Brutus and Cassius, who feared Caesar's growing power."
+        },
+        {
+            question: "Roman auxiliary troops were:",
+            answers: ["Non-citizen soldiers from provinces", "Retired legionaries"],
+            correct: 0,
+            difficulty: "hard",
+            explanation: "Auxiliaries were non-Roman soldiers from conquered territories. They served 25 years and received Roman citizenship upon retirement. They provided cavalry, archers, and specialized troops legions lacked."
         }
     ],
 

@@ -423,6 +423,93 @@ class TradingGame {
         }
     }
 
+    calculateGrade(totalScore) {
+        // Grading system based on total score
+        if (totalScore >= 100000) {
+            return {
+                letter: 'S',
+                title: 'Legendary Merchant!',
+                description: 'Your business acumen is unmatched in colonial history!',
+                class: 'grade-s'
+            };
+        } else if (totalScore >= 70000) {
+            return {
+                letter: 'A',
+                title: 'Master Trader',
+                description: 'You\'ve built an empire worthy of the history books!',
+                class: 'grade-a'
+            };
+        } else if (totalScore >= 50000) {
+            return {
+                letter: 'B',
+                title: 'Skilled Merchant',
+                description: 'Your shrewd business decisions paid off handsomely!',
+                class: 'grade-b'
+            };
+        } else if (totalScore >= 30000) {
+            return {
+                letter: 'C',
+                title: 'Competent Trader',
+                description: 'You survived the turbulent times with moderate success.',
+                class: 'grade-c'
+            };
+        } else if (totalScore >= 15000) {
+            return {
+                letter: 'D',
+                title: 'Struggling Merchant',
+                description: 'The path to prosperity was challenging, but you persevered.',
+                class: 'grade-d'
+            };
+        } else {
+            return {
+                letter: 'F',
+                title: 'Financial Hardship',
+                description: 'The revolution proved costly for your business ventures.',
+                class: 'grade-f'
+            };
+        }
+    }
+
+    loadHighScores() {
+        const saved = localStorage.getItem('hancockHighScores');
+        if (saved) {
+            return JSON.parse(saved);
+        }
+        return {
+            highestProfit: 0,
+            highestReputation: 0,
+            mostShips: 0,
+            bestScore: 0,
+            bestGrade: 'F'
+        };
+    }
+
+    saveHighScores(profit, reputation, ships, score, grade) {
+        const highScores = this.loadHighScores();
+        let isNewRecord = false;
+
+        if (profit > highScores.highestProfit) {
+            highScores.highestProfit = profit;
+            isNewRecord = true;
+        }
+        if (reputation > highScores.highestReputation) {
+            highScores.highestReputation = reputation;
+            isNewRecord = true;
+        }
+        if (ships > highScores.mostShips) {
+            highScores.mostShips = ships;
+            isNewRecord = true;
+        }
+        if (score > highScores.bestScore) {
+            highScores.bestScore = score;
+            highScores.bestGrade = grade;
+            isNewRecord = true;
+        }
+
+        localStorage.setItem('hancockHighScores', JSON.stringify(highScores));
+        return isNewRecord;
+    }
+
     endGame() {
         // Stop price updates
         if (this.priceUpdateInterval) {
@@ -437,6 +524,26 @@ class TradingGame {
         const totalWealth = this.state.money + inventoryValue;
         const profit = totalWealth - this.state.startingMoney;
 
+        // Calculate total score (weighted: profit 60%, reputation 25%, ships 15%)
+        const totalScore = Math.round(
+            profit * 0.6 +
+            (this.state.reputation * 500) * 0.25 +
+            (this.state.ships * 2000) * 0.15
+        );
+
+        // Get grade
+        const grade = this.calculateGrade(totalScore);
+
+        // Check and save high scores
+        const isNewRecord = this.saveHighScores(
+            profit,
+            this.state.reputation,
+            this.state.ships,
+            totalScore,
+            grade.letter
+        );
+        const highScores = this.loadHighScores();
+
         // Show end screen
         document.getElementById('gameScreen').classList.add('hidden');
         document.getElementById('endScreen').classList.remove('hidden');
@@ -446,7 +553,47 @@ class TradingGame {
         document.getElementById('finalShips').textContent = this.state.ships;
         document.getElementById('totalProfit').textContent = `£${profit.toLocaleString()}`;
 
+        // Build message with grade display
         let message = `<p>The Revolutionary War has begun! Your business empire has helped pave the way for American independence.</p>`;
+
+        // Add grade display
+        message += `
+            <div class="grade-display">
+                <div class="grade-title">Performance Grade</div>
+                <div class="grade-letter ${grade.class}">${grade.letter}</div>
+                <div class="grade-title">${grade.title}</div>
+                <div class="grade-description">${grade.description}</div>
+                <p style="color: #f4ecd8; margin-top: 15px; font-size: 1.1em;">Total Score: ${totalScore.toLocaleString()} points</p>
+            </div>
+        `;
+
+        // Add new record notification
+        if (isNewRecord) {
+            message += `<div class="new-record">🎉 NEW RECORD! 🎉</div>`;
+        }
+
+        // Add high scores display
+        message += `
+            <div class="high-score-display">
+                <h4>Your Best Records</h4>
+                <div class="high-score-item">
+                    <span class="high-score-label">Highest Profit:</span>
+                    <span class="high-score-value">£${highScores.highestProfit.toLocaleString()}</span>
+                </div>
+                <div class="high-score-item">
+                    <span class="high-score-label">Best Reputation:</span>
+                    <span class="high-score-value">${highScores.highestReputation}%</span>
+                </div>
+                <div class="high-score-item">
+                    <span class="high-score-label">Most Ships:</span>
+                    <span class="high-score-value">${highScores.mostShips}</span>
+                </div>
+                <div class="high-score-item">
+                    <span class="high-score-label">Best Score:</span>
+                    <span class="high-score-value">${highScores.bestScore.toLocaleString()} (Grade ${highScores.bestGrade})</span>
+                </div>
+            </div>
+        `;
 
         if (profit > 50000) {
             message += `<p><strong>Outstanding Success!</strong> Your brilliant trading made you one of the wealthiest patriots. Your fortune will help fund the Revolution and secure liberty!</p>`;

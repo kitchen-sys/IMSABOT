@@ -1,0 +1,465 @@
+/* Johnny Tremain: A Revolutionary Journey - Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Garamond', serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e8e8e8;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.game-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 2px solid #8b4513;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #d4af37;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: #c9a961;
+    font-style: italic;
+}
+
+.game-screen {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.game-screen.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Welcome Screen */
+.welcome-box,
+.end-box {
+    background: rgba(20, 20, 40, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    border: 3px solid #8b4513;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.welcome-box h2,
+.end-box h2 {
+    color: #d4af37;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.welcome-box p,
+.end-box p {
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.welcome-box ul {
+    margin: 20px 0 20px 30px;
+    line-height: 2;
+}
+
+.instruction {
+    background: rgba(212, 175, 55, 0.1);
+    padding: 15px;
+    border-left: 4px solid #d4af37;
+    margin: 20px 0;
+    font-style: italic;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-action,
+.btn-advance,
+.choice-btn {
+    background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+    color: #fff;
+    border: 2px solid #d4af37;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.btn-primary:hover,
+.btn-action:hover,
+.btn-advance:hover,
+.choice-btn:hover {
+    background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-primary {
+    display: block;
+    margin: 30px auto 0;
+    width: 300px;
+}
+
+/* Status Bar */
+.status-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(20, 20, 40, 0.7);
+    border-radius: 10px;
+    border: 2px solid #8b4513;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-tooltip {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9em;
+    color: #c9a961;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.stat-value {
+    font-size: 1.5em;
+    color: #d4af37;
+    font-weight: bold;
+}
+
+.stat-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 8px 0;
+    border: 1px solid #555;
+}
+
+.stat-fill {
+    height: 100%;
+    transition: width 0.5s ease;
+    border-radius: 10px;
+}
+
+.pride-fill {
+    background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
+}
+
+.humility-fill {
+    background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
+}
+
+.patriotism-fill {
+    background: linear-gradient(90deg, #e67e22 0%, #d35400 100%);
+}
+
+.skills-fill {
+    background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%);
+}
+
+/* Main Content */
+.main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.story-panel {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    background: rgba(20, 20, 40, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid #8b4513;
+}
+
+.story-panel h2 {
+    color: #d4af37;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.chapter-year {
+    color: #c9a961;
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.story-text {
+    line-height: 1.8;
+    font-size: 1.05em;
+    white-space: pre-line;
+}
+
+.relationships-panel {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    background: rgba(20, 20, 40, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #8b4513;
+    height: fit-content;
+}
+
+.relationships-panel h3 {
+    color: #d4af37;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.relationships-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.relationship-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.person-name {
+    color: #c9a961;
+    font-weight: bold;
+}
+
+.relationship-value {
+    color: #d4af37;
+}
+
+.choices-panel {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    background: rgba(20, 20, 40, 0.8);
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px solid #8b4513;
+}
+
+.choices-panel h3 {
+    color: #d4af37;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+}
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.choice-btn {
+    width: 100%;
+    text-align: left;
+    padding: 20px;
+    font-size: 1em;
+}
+
+.result-panel {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    background: rgba(20, 20, 40, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid #d4af37;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.result-panel.hidden {
+    display: none;
+}
+
+.result-text {
+    line-height: 1.8;
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    color: #e8e8e8;
+}
+
+.btn-advance {
+    display: block;
+    margin: 0 auto;
+}
+
+.journal-panel {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+    background: rgba(20, 20, 40, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #8b4513;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.journal-panel h3 {
+    color: #d4af37;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.journal-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.journal-entry {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid #8b4513;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+/* End Screen */
+.final-stats {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 25px;
+    border-radius: 10px;
+    margin: 25px 0;
+    border: 2px solid #8b4513;
+}
+
+.final-stats h3 {
+    color: #d4af37;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.final-stats p {
+    margin: 12px 0;
+    font-size: 1.1em;
+}
+
+.final-stats span {
+    color: #d4af37;
+    font-weight: bold;
+}
+
+.character-assessment {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #8b4513;
+}
+
+.character-assessment h4 {
+    color: #d4af37;
+    margin-bottom: 15px;
+}
+
+.assessment-good {
+    color: #2ecc71;
+    margin: 10px 0;
+    padding: 10px;
+    background: rgba(46, 204, 113, 0.1);
+    border-left: 4px solid #2ecc71;
+}
+
+.assessment-neutral {
+    color: #f39c12;
+    margin: 10px 0;
+    padding: 10px;
+    background: rgba(243, 156, 18, 0.1);
+    border-left: 4px solid #f39c12;
+}
+
+.assessment-warning {
+    color: #e74c3c;
+    margin: 10px 0;
+    padding: 10px;
+    background: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid #e74c3c;
+}
+
+/* Scrollbar styling */
+.journal-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.journal-panel::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.journal-panel::-webkit-scrollbar-thumb {
+    background: #8b4513;
+    border-radius: 4px;
+}
+
+.journal-panel::-webkit-scrollbar-thumb:hover {
+    background: #a0522d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .story-panel,
+    .relationships-panel,
+    .choices-panel,
+    .result-panel,
+    .journal-panel {
+        grid-column: 1 / 2;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .status-bar {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .welcome-box,
+    .end-box {
+        padding: 20px;
+    }
+}

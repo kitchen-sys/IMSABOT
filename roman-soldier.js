@@ -37,6 +37,63 @@ const game = {
         { name: "Titus", relationship: 50, bonus: 0 }
     ],
 
+    // Horse system
+    horse: null,
+    horses: [
+        {
+            name: "Common Mule",
+            price: 200,
+            bonus: 2,
+            description: "A sturdy pack animal. Provides +2% combat bonus and faster movement.",
+            speedBonus: 5
+        },
+        {
+            name: "Gallic Warhorse",
+            price: 500,
+            bonus: 5,
+            description: "A powerful Gallic breed. Provides +5% combat bonus and intimidates enemies.",
+            speedBonus: 10
+        },
+        {
+            name: "Roman Destrier",
+            price: 1000,
+            bonus: 10,
+            description: "An elite cavalry mount. Provides +10% combat bonus and +5 honor per battle.",
+            speedBonus: 15,
+            honorBonus: 5
+        }
+    ],
+
+    // Letters from home
+    lettersRead: [],
+    letters: [
+        {
+            title: "From Your Father",
+            content: "My dear child,\n\nYour mother and I pray daily to the household gods for your safe return. The farm continues well - we harvested 30 amphorae of wine this season. Your younger brother speaks often of joining the legions like you.\n\nRemember the virtues we taught you: virtus (courage), pietas (duty), and gravitas (dignity). Bring honor to our family name.\n\nYour father sends his blessing.",
+            context: "Roman families were close-knit. The 'paterfamilias' (father) held absolute authority, and family honor was paramount. Household gods (Lares) protected the home."
+        },
+        {
+            title: "From Your Sister",
+            content: "Dearest brother,\n\nI write with joyful news - I am to be married! Father arranged a match with Marcus Tullius, a merchant of good standing. The dowry has been agreed upon.\n\nI fear I will not see you at the ceremony. Please return safely so you may meet my children someday. The city feels empty without your presence.\n\nMay Mars protect you in battle.",
+            context: "Roman women typically married young (age 12-15 for girls, 25-30 for men). Marriages were arranged by fathers to strengthen family alliances and social position."
+        },
+        {
+            title: "From Your Mother",
+            content: "My beloved son,\n\nI light incense at the temple of Vesta for you each morning. Your room remains as you left it. I have woven you a new cloak from the finest wool - I will send it with the next supply wagon.\n\nTake care of your health. Eat well, stay dry, and trust in the gods. I await the day you return victorious.\n\nWith a mother's eternal love.",
+            context: "Roman mothers had limited legal rights but wielded significant influence through family bonds. Vesta was the goddess of the hearth and home, representing domestic security."
+        },
+        {
+            title: "From A Childhood Friend",
+            content: "Greetings, old friend!\n\nMuch has changed since you left for the legions. Lucius opened a tavern near the Forum. Quintus married that baker's daughter (yes, that one!).\n\nWe speak of you often at the baths. Your courage is known even here. When you return, there will be wine and celebration!\n\nThe gods smile upon you, brother.",
+            context: "Roman friendships were important social bonds. Men gathered at public baths (thermae) daily to socialize, exercise, and discuss news. These were centers of community life."
+        },
+        {
+            title: "News from Rome",
+            content: "To Legionary [Your Name],\n\nOfficial dispatch: The Senate commemorates your legion's victories. Caesar speaks highly of your service. Upon completion of your 25-year term, land in the new province awaits you.\n\nRemember: You fight not just for glory, but for Rome's eternal destiny. The Republic depends on soldiers like you.\n\nBy order of the Senate and People of Rome.",
+            context: "After 25 years of service, legionaries received either land grants in newly conquered territories or a cash pension. This created loyalty and helped Romanize conquered regions with veteran settlers."
+        }
+    ],
+
     // Stats for achievements
     knowledgeScore: 0, // Total correct answers - visible progress metric
 
@@ -581,6 +638,8 @@ const game = {
         this.legendaryItemsFound = 0;
         this.knowledgeScore = 0; // Reset knowledge score
         this.askedQuestions = []; // Reset asked questions
+        this.horse = null; // Reset horse
+        this.lettersRead = []; // Reset letters
 
         // Reset equipment
         this.equipment = {
@@ -923,6 +982,19 @@ const game = {
             resultText += `<p><strong style="color: #4dff4d;">Companions Help!</strong> Your companions reduced damage by ${damageReduction} (${totalCompanionBonus}% total bonus)</p>`;
         }
 
+        // Apply horse bonuses
+        if (this.horse) {
+            const horseDamageReduction = Math.floor(damage * (this.horse.bonus / 100));
+            damage = Math.max(0, damage - horseDamageReduction);
+            resultText += `<p><strong style="color: #ffaa4d;">🐴 ${this.horse.name}!</strong> Your mount reduced damage by ${horseDamageReduction} (${this.horse.bonus}% bonus)</p>`;
+
+            // Roman Destrier gives honor bonus
+            if (this.horse.honorBonus) {
+                honorGain += this.horse.honorBonus;
+                resultText += `<p><strong style="color: #ffd700;">Prestigious Mount!</strong> Your elite horse impresses all (+${this.horse.honorBonus} extra honor)</p>`;
+            }
+        }
+
         // Apply results
         this.health = Math.max(0, this.health - damage);
         this.honor = Math.max(0, Math.min(100, this.honor + honorGain));
@@ -1146,6 +1218,204 @@ const game = {
 
     closeShop() {
         document.getElementById('shopModal').classList.add('hidden');
+    },
+
+    // Horse System
+    showHorses() {
+        const modal = document.getElementById('horseModal');
+        const horseItems = document.getElementById('horseItems');
+        const horseGold = document.getElementById('horseGold');
+        const currentHorseDisplay = document.getElementById('currentHorseDisplay');
+
+        horseGold.textContent = this.gold;
+        modal.classList.remove('hidden');
+
+        // Show current horse if any
+        if (this.horse) {
+            currentHorseDisplay.textContent = `Current Mount: ${this.horse.name} (+${this.horse.bonus}% combat bonus)`;
+        } else {
+            currentHorseDisplay.textContent = "You are traveling on foot.";
+            currentHorseDisplay.style.color = '#888';
+        }
+
+        // Generate horse options
+        horseItems.innerHTML = '';
+
+        this.horses.forEach((horse, index) => {
+            const alreadyOwned = this.horse && this.horse.name === horse.name;
+            const canAfford = this.gold >= horse.price;
+
+            const horseItem = document.createElement('div');
+            horseItem.className = 'shop-item';
+            horseItem.style.border = alreadyOwned ? '3px solid #4dff4d' : '2px solid #8b4513';
+
+            horseItem.innerHTML = `
+                <div class="shop-item-name" style="color: ${alreadyOwned ? '#4dff4d' : '#ffd700'};">${horse.name}</div>
+                <div class="shop-item-stats">${horse.description}</div>
+                <div class="shop-item-stats">Combat: +${horse.bonus}%</div>
+                <div class="shop-item-price">${horse.price} Gold</div>
+                <button class="btn-buy" ${!canAfford || alreadyOwned ? 'disabled' : ''} data-buy-horse="${index}">
+                    ${alreadyOwned ? 'Currently Owned' : !canAfford ? 'Not Enough Gold' : 'Purchase'}
+                </button>
+            `;
+
+            // Attach event listener
+            const buyBtn = horseItem.querySelector('[data-buy-horse]');
+            if (!buyBtn.disabled) {
+                buyBtn.addEventListener('click', () => {
+                    game.buyHorse(index);
+                });
+            }
+
+            horseItems.appendChild(horseItem);
+        });
+    },
+
+    buyHorse(index) {
+        const horse = this.horses[index];
+        if (this.gold < horse.price) return;
+
+        this.gold -= horse.price;
+        this.horse = { ...horse };
+
+        this.updateDisplay();
+        alert(`Purchased ${horse.name}! Your mount provides a +${horse.bonus}% combat bonus.`);
+
+        // Refresh horse display
+        this.showHorses();
+    },
+
+    closeHorses() {
+        document.getElementById('horseModal').classList.add('hidden');
+    },
+
+    // Letters from Home System
+    readLetters() {
+        const modal = document.getElementById('lettersModal');
+        const lettersList = document.getElementById('lettersList');
+
+        modal.classList.remove('hidden');
+
+        // Generate letter options
+        lettersList.innerHTML = '';
+
+        // Always show 1-2 new letters per check
+        const availableLetters = this.letters.filter((l, index) => !this.lettersRead.includes(index));
+        const numNewLetters = Math.min(Math.floor(Math.random() * 2) + 1, availableLetters.length);
+
+        if (this.lettersRead.length < this.letters.length) {
+            // Show unread letters
+            for (let i = 0; i < numNewLetters && this.lettersRead.length < this.letters.length; i++) {
+                const randomIndex = this.letters.findIndex((l, idx) => !this.lettersRead.includes(idx));
+                if (randomIndex !== -1) {
+                    this.addLetterButton(lettersList, randomIndex, true);
+                }
+            }
+        }
+
+        // Show previously read letters
+        this.lettersRead.forEach(index => {
+            this.addLetterButton(lettersList, index, false);
+        });
+
+        if (this.lettersRead.length === 0 && availableLetters.length === 0) {
+            lettersList.innerHTML = '<p style="text-align: center; color: #888;">No letters have arrived yet...</p>';
+        }
+    },
+
+    addLetterButton(container, index, isNew) {
+        const letter = this.letters[index];
+        const letterBtn = document.createElement('button');
+        letterBtn.className = 'choice-btn';
+        letterBtn.style.background = isNew ? 'rgba(77, 255, 77, 0.2)' : 'rgba(139, 69, 19, 0.5)';
+        letterBtn.style.border = isNew ? '2px solid #4dff4d' : '2px solid #8b4513';
+
+        letterBtn.innerHTML = `
+            ${isNew ? '<span style="color: #4dff4d;">✉️ NEW!</span> ' : ''}
+            ${letter.title}
+            ${isNew ? '<div style="font-size: 0.9em; margin-top: 5px; color: #4dff4d;">+2 Honor for reading</div>' : ''}
+        `;
+
+        letterBtn.onclick = () => this.openLetter(index, isNew);
+        container.appendChild(letterBtn);
+    },
+
+    openLetter(index, isNew) {
+        const letter = this.letters[index];
+
+        // Give honor bonus for new letters
+        if (isNew && !this.lettersRead.includes(index)) {
+            this.honor = Math.min(100, this.honor + 2);
+            this.lettersRead.push(index);
+            this.updateDisplay();
+        }
+
+        // Show letter detail
+        document.getElementById('lettersModal').classList.add('hidden');
+        document.getElementById('letterDetailModal').classList.remove('hidden');
+
+        document.getElementById('letterTitle').textContent = letter.title;
+        document.getElementById('letterContent').textContent = letter.content;
+        document.getElementById('letterContextText').textContent = letter.context;
+    },
+
+    closeLetters() {
+        document.getElementById('lettersModal').classList.add('hidden');
+    },
+
+    closeLetterDetail() {
+        document.getElementById('letterDetailModal').classList.add('hidden');
+        // Reopen letters list
+        this.readLetters();
+    },
+
+    // Desertion - Immediate Game Over
+    desert() {
+        const confirmation = confirm("⚠️ WARNING ⚠️\n\nDesertion from the Roman legion is punishable by DEATH.\n\nIf caught, you will be executed. Even if you escape, you will be branded a criminal, hunted by Rome, and your family will be dishonored.\n\nAre you CERTAIN you wish to abandon your oath to the legion?");
+
+        if (!confirmation) return;
+
+        // Immediate game over
+        document.getElementById('gameScreen').classList.add('hidden');
+        document.getElementById('endScreen').classList.remove('hidden');
+
+        const endingText = `
+            <h3 style="color: #dc143c; text-align: center; margin-bottom: 20px;">⚔️ DESERTER ⚔️</h3>
+            <p><strong>You fled the legion under cover of darkness...</strong></p>
+            <p>For three days, you ran through Gallic forests, always looking over your shoulder. Every sound made you jump. Every stranger might be a Roman scout.</p>
+            <p>On the fourth morning, they found you.</p>
+            <p>A patrol of your former legion. Men you once called brothers. Marcus would not meet your eyes. The centurion pronounced the sentence without emotion: "Desertion. Death by decimation."</p>
+            <p>You died on your knees in a foreign land, far from home, branded a coward and traitor. Your name was stricken from all records. Your family received nothing - no pension, no land, no honor.</p>
+            <p><strong style="color: #dc143c;">Your story ends here, forgotten and dishonored.</strong></p>
+        `;
+
+        document.getElementById('endingText').innerHTML = endingText;
+
+        // Show terrible "stats"
+        document.getElementById('finalLevel').textContent = this.level;
+        document.getElementById('finalHonor').textContent = '0 (DESERTER)';
+        document.getElementById('finalGold').textContent = this.gold;
+        document.getElementById('finalKnowledge').textContent = this.knowledgeScore;
+        document.getElementById('finalCorrect').textContent = this.correctAnswers;
+        document.getElementById('finalTotal').textContent = this.totalQuestions;
+        document.getElementById('finalLegendary').textContent = this.legendaryItemsFound;
+
+        // Historical truth about desertion
+        const historicalTruth = document.querySelector('.historical-truth');
+        historicalTruth.innerHTML = `
+            <h3>The Historical Truth About Desertion</h3>
+            <p><strong>Desertion in the Roman Army:</strong> Desertion was considered one of the most serious crimes in the Roman military. The punishment was severe and unforgiving.</p>
+
+            <p><strong>Punishments:</strong> Deserters faced execution if caught. The method varied - crucifixion, beheading, or being thrown to wild beasts in the arena. Sometimes, the entire unit would be "decimated" - every 10th man executed - to deter future desertions.</p>
+
+            <p><strong>Fustuarium:</strong> Some deserters were beaten to death by their own comrades using clubs and stones. This sent a powerful message about unit loyalty.</p>
+
+            <p><strong>Family Consequences:</strong> Desertion brought shame to the soldier's family. They would receive no pension or land grants. In some cases, family members could be enslaved or executed.</p>
+
+            <p><strong>Why So Harsh?:</strong> Roman military success depended on absolute discipline and loyalty. A single deserter could cause panic and endanger entire legions. The Romans believed harsh punishment was necessary to maintain order in armies operating far from home for years at a time.</p>
+
+            <p><strong>Modern Perspective:</strong> While we can understand soldiers who wanted to escape brutal conditions, desertion undermined the very structure that kept Roman armies effective. It was seen as betraying not just the army, but Rome itself and one's sacred oath.</p>
+        `;
     },
 
     // Companion Theft Mechanic

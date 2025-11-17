@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Middle Passage: A Journey Through History</title>
+    <link rel="stylesheet" href="middle-passage.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>The Middle Passage</h1>
+            <p class="subtitle">A Journey Through History</p>
+        </header>
+
+        <!-- Start Screen -->
+        <div class="game-screen" id="startScreen">
+            <div class="welcome-box">
+                <h2>West Africa, 1755</h2>
+                <p class="content-warning"><strong>Content Warning:</strong> This educational game deals with the traumatic historical reality of slavery and the transatlantic slave trade. It contains descriptions of violence, suffering, and dehumanization. This experience is designed to honor the memory of those who endured the Middle Passage and to educate about this dark chapter of history.</p>
+
+                <div class="historical-context">
+                    <h3>Historical Context</h3>
+                    <p>Between the 16th and 19th centuries, approximately 12.5 million Africans were forcibly transported across the Atlantic Ocean in the transatlantic slave trade. Nearly 2 million died during the horrific journey known as the Middle Passage.</p>
+
+                    <p>You will experience this journey through the eyes of Adisa, a young person from a West African village who is captured and sold into slavery. This is their story—and the story of millions.</p>
+
+                    <p><strong>This game includes:</strong></p>
+                    <ul>
+                        <li>10 chapters documenting the journey from capture to auction</li>
+                        <li>Difficult choices that illustrate the impossible decisions faced by enslaved people</li>
+                        <li>Historical facts and statistics</li>
+                        <li>A respectful portrayal of suffering, resistance, and resilience</li>
+                    </ul>
+
+                    <p class="instruction"><em>"Those who cannot remember the past are condemned to repeat it."</em> — George Santayana</p>
+                </div>
+
+                <button class="btn-primary" onclick="game.startGame()">Begin Historical Journey</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="game-screen hidden" id="gameScreen">
+            <div class="status-bar">
+                <div class="stat">
+                    <span class="stat-label">Chapter:</span>
+                    <span class="stat-value" id="round">1</span>/10
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">Hope:</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill hope-fill" id="hopeFill" style="width: 100%"></div>
+                    </div>
+                    <span class="stat-value" id="hope">100</span>
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">Strength:</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill strength-fill" id="strengthFill" style="width: 100%"></div>
+                    </div>
+                    <span class="stat-value" id="strength">100</span>
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">Spirit:</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill spirit-fill" id="spiritFill" style="width: 100%"></div>
+                    </div>
+                    <span class="stat-value" id="spirit">100</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Days:</span>
+                    <span class="stat-value" id="days">0</span>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="story-panel">
+                    <h2 id="chapterTitle">Chapter Title</h2>
+                    <div class="chapter-info">
+                        <span class="chapter-location" id="chapterLocation">Location</span>
+                        <span class="chapter-date" id="chapterDate">Date</span>
+                    </div>
+                    <div class="story-text" id="storyText"></div>
+                </div>
+
+                <div class="historical-note-panel">
+                    <h3>Historical Note</h3>
+                    <div class="historical-note" id="historicalNote">
+                        Historical information will appear here.
+                    </div>
+                </div>
+
+                <div class="choices-panel" id="choicesPanel">
+                    <h3>What will you do?</h3>
+                    <div class="choices" id="choices"></div>
+                </div>
+
+                <div class="result-panel hidden" id="resultPanel">
+                    <div class="result-text" id="resultText"></div>
+                    <button class="btn-continue" onclick="game.nextRound()">Continue Journey</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Screen -->
+        <div class="game-screen hidden" id="endScreen">
+            <div class="end-box">
+                <h2>Charleston, South Carolina - 1756</h2>
+                <div id="endingText" class="ending-text"></div>
+
+                <div class="final-stats">
+                    <h3>Your Journey</h3>
+                    <div class="stat-row">
+                        <span>Hope Remaining:</span>
+                        <span id="finalHope">0</span>%
+                    </div>
+                    <div class="stat-row">
+                        <span>Strength Remaining:</span>
+                        <span id="finalStrength">0</span>%
+                    </div>
+                    <div class="stat-row">
+                        <span>Spirit Remaining:</span>
+                        <span id="finalSpirit">0</span>%
+                    </div>
+                    <div class="stat-row">
+                        <span>Days Survived:</span>
+                        <span id="finalDays">0</span>
+                    </div>
+                </div>
+
+                <div class="historical-truth">
+                    <h3>The Historical Truth</h3>
+                    <p><strong>The Middle Passage:</strong> Between 1525 and 1866, approximately 12.5 million Africans were shipped to the Americas. About 1.8 million died during the voyage—a mortality rate of nearly 15%.</p>
+
+                    <p><strong>Charleston, South Carolina:</strong> Charleston was the largest port of entry for enslaved Africans in North America. Nearly 40% of all enslaved Africans brought to the United States came through Charleston.</p>
+
+                    <p><strong>Conditions:</strong> Enslaved people were packed into spaces as small as 5-6 feet long and 2-3 feet high. They were chained together, lying in their own waste, with minimal food and water. Disease was rampant—dysentery, smallpox, and scurvy killed thousands.</p>
+
+                    <p><strong>Resistance:</strong> Enslaved Africans resisted in many ways—from refusing to eat (requiring forced feeding), to organized rebellions aboard ships, to choosing death over enslavement. Their courage and dignity in the face of unimaginable horror must never be forgotten.</p>
+
+                    <p><strong>Legacy:</strong> The transatlantic slave trade was one of history's greatest crimes against humanity. Its effects continue to shape our world today. We honor those who suffered and died by remembering their stories and working toward justice and equality.</p>
+
+                    <p class="memorial"><em>In memory of the millions who endured the Middle Passage, those who survived and those who did not. Their suffering, resistance, and resilience must never be forgotten.</em></p>
+                </div>
+
+                <button class="btn-primary" onclick="location.reload()">Return to Beginning</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="middle-passage.js"></script>
+</body>
+</html>

@@ -66,6 +66,17 @@
                 <div class="stat">
                     <span class="stat-label">Level:</span>
                     <span class="stat-value" id="level">1</span>
+                    <div class="xp-progress-container">
+                        <div class="xp-bar-outer">
+                            <div class="xp-bar-fill" id="xpBarFill" style="width: 0%"></div>
+                            <div class="xp-text" id="xpText">0/100 XP</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Roman Knowledge:</span>
+                    <span class="stat-value knowledge-score" id="knowledgeScore">0</span>
+                    <div style="font-size: 0.8em; color: #f4e4c1;">Correct Answers</div>
                 </div>
                 <div class="stat">
                     <span class="stat-label">Gold:</span>
@@ -160,6 +171,10 @@
                     <div class="stat-row">
                         <span>Gold Accumulated:</span>
                         <span id="finalGold">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Roman Knowledge Score:</span>
+                        <span id="finalKnowledge" style="color: #ffd700; font-weight: bold;">0</span>
                     </div>
                     <div class="stat-row">
                         <span>Questions Answered Correctly:</span>

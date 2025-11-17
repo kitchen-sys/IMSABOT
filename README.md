@@ -1,6 +1,6 @@
 # IMSABOT - Historical Games Collection
 
-Interactive historical games exploring pivotal moments in American Revolutionary history.
+Interactive historical games exploring pivotal moments in American history, from the transatlantic slave trade to the American Revolution.
 
 ---
 
@@ -13,7 +13,16 @@ Experience the legendary midnight ride of April 18-19, 1775! Make critical decis
 
 **Files:** `paul-revere.html`, `paul-revere.css`, `paul-revere.js`
 
-[Play Paul Revere's Midnight Ride](#paul-reveres-midnight-ride) | [Play John Hancock's Trading Empire](#john-hancocks-trading-empire)
+### 2. The Middle Passage
+**A Historical Educational Experience**
+
+A serious, historically accurate educational game about the transatlantic slave trade. Experience the harrowing journey from West Africa to Charleston, South Carolina through the eyes of an enslaved person. This respectful portrayal showcases the brutal reality of slavery while honoring the resilience and humanity of those who endured it.
+
+**Content Warning:** Deals with traumatic historical realities including violence and dehumanization.
+
+**Files:** `middle-passage.html`, `middle-passage.css`, `middle-passage.js`
+
+[Play Paul Revere's Midnight Ride](#paul-reveres-midnight-ride) | [Play The Middle Passage](#the-middle-passage) | [Play John Hancock's Trading Empire](#john-hancocks-trading-empire)
 
 ---
 
@@ -224,6 +233,12 @@ IMSABOT/
 ├── paul-revere.html       # Paul Revere game HTML
 ├── paul-revere.css        # Paul Revere game styling
 ├── paul-revere.js         # Paul Revere game engine
+├── middle-passage.html    # Middle Passage game HTML
+├── middle-passage.css     # Middle Passage game styling
+├── middle-passage.js      # Middle Passage game engine
+├── johnny-tremain.html    # Johnny Tremain game HTML
+├── johnny-tremain.css     # Johnny Tremain game styling
+├── johnny-tremain.js      # Johnny Tremain game engine
 ├── index.html             # John Hancock game HTML (original)
 ├── styles.css             # John Hancock game styling
 ├── game.js                # John Hancock game engine
@@ -361,13 +376,121 @@ At the end of the game, players receive a detailed assessment of Johnny's charac
 
 ---
 
+## The Middle Passage
+
+### Game Overview
+
+An educational historical experience that portrays the transatlantic slave trade with historical accuracy and appropriate gravity. This game takes players through the horrific journey of the Middle Passage—from capture in West Africa to auction in Charleston, South Carolina.
+
+**Content Warning:** This game deals with the traumatic historical reality of slavery, including violence, suffering, and dehumanization. It is designed for educational purposes to honor the memory of those who endured the Middle Passage.
+
+### Historical Significance
+
+Between the 16th and 19th centuries, approximately 12.5 million Africans were forcibly transported across the Atlantic Ocean. Nearly 2 million died during the Middle Passage. Charleston, South Carolina was the largest port of entry in North America—nearly 40% of all enslaved Africans brought to the United States came through Charleston.
+
+### Gameplay Features
+
+#### Character Journey System
+Track the protagonist Adisa's journey through three core attributes:
+- **Hope**: The capacity to envision a better future
+- **Strength**: Physical and mental endurance
+- **Spirit**: Cultural identity, dignity, and resistance
+
+Each choice affects these attributes, showing how enslaved people maintained humanity despite dehumanizing conditions.
+
+### The 10 Chapters
+
+1. **The Raid** - Capture in a West African village
+2. **The Coffle March** - The brutal forced march to the coast
+3. **The Barracoon** - Imprisonment in a slave fortress
+4. **Into the Ship** - Boarding the slave ship
+5. **The Hold** - Horrific conditions below deck
+6. **The Dying Time** - Disease and death during the voyage
+7. **The Tempest** - Surviving a deadly storm
+8. **Despair and Endurance** - Maintaining identity and culture
+9. **Land in Sight** - Approaching Charleston
+10. **The Auction Block** - Sale into slavery in Charleston
+
+### How to Play
+
+1. Open `middle-passage.html` in any modern web browser
+2. Read the content warning and historical context
+3. Experience each chapter's story
+4. Make difficult choices that reflect the impossible decisions faced by enslaved people
+5. Learn historical facts about each stage of the journey
+6. Complete all 10 chapters to understand the full scope of the Middle Passage
+
+### Educational Value
+
+Players learn about:
+- The capture and sale of Africans by rival kingdoms working with European traders
+- The conditions of slave fortresses along the African coast
+- The horrific reality of the Middle Passage voyage
+- Disease, mortality, and suffering aboard slave ships
+- Acts of resistance: rebellions, hunger strikes, cultural preservation
+- Charleston's role as the primary slave port in North America
+- The auction process and family separation
+- The resilience and humanity of enslaved people
+
+### Themes Explored
+
+- **Dehumanization vs. Humanity**: How enslaved people maintained dignity despite systematic dehumanization
+- **Resistance**: Many forms of resistance, from rebellion to cultural preservation
+- **Survival**: The impossible choices required to endure
+- **Memory**: The importance of remembering and bearing witness
+- **Legacy**: How the trauma and resistance of the Middle Passage shaped African American culture
+
+### Historical Accuracy
+
+This game is based on extensive historical documentation:
+
+- **Mortality Rates**: The 15-20% mortality rate during the Middle Passage is historically accurate
+- **Ship Conditions**: The cramped spaces (6 feet by 16 inches per person) are based on ship diagrams and records
+- **Charleston's Role**: Charleston was indeed the largest slave port in North America
+- **Resistance**: Hundreds of shipboard rebellions are documented, most ending in brutal reprisals
+- **Cultural Preservation**: Enslaved Africans did preserve languages, music, stories, and spiritual practices
+- **Locations**: Elmina Castle and other slave fortresses still stand as museums and memorials
+
+### Respectful Treatment
+
+This game aims to:
+- Honor the memory of millions who suffered and died
+- Educate about historical truth without sensationalizing
+- Show the resilience and resistance of enslaved people
+- Emphasize that enslaved people were not passive victims but active resisters
+- Present suffering with appropriate gravity and context
+- Provide historical facts and context throughout
+
+### Technical Details
+
+#### Files
+- `middle-passage.html` - Game structure and narrative
+- `middle-passage.css` - Somber, respectful styling
+- `middle-passage.js` - Historical narrative engine and choice system
+
+#### Technologies
+- Pure vanilla JavaScript (no frameworks required)
+- HTML5 and CSS3
+- Responsive design for desktop and mobile
+- Dynamic stat tracking based on player choices
+
+### Why This Game Matters
+
+"Those who cannot remember the past are condemned to repeat it." This game exists to ensure we remember. The Middle Passage was one of history's greatest crimes against humanity. By experiencing even a small fraction of this journey through an interactive narrative, players gain deeper understanding and empathy.
+
+This is not entertainment—it is education and memorial.
+
+---
+
 ## Getting Started
 
-Choose your adventure:
+Choose your experience:
+- **Revolutionary Adventure**: Play Paul Revere's Midnight Ride (`paul-revere.html`)
+- **Historical Education**: Play The Middle Passage (`middle-passage.html`)
 - **Economic Strategy**: Play John Hancock's Trading Empire (`index.html`)
 - **Narrative Journey**: Play Johnny Tremain (`johnny-tremain.html`)
 
-Both games run entirely in your web browser with no installation required!
+All games run entirely in your web browser with no installation required!
 
 ---
 

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Johnny Tremain: A Revolutionary Journey</title>
+    <link rel="stylesheet" href="johnny-tremain.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Johnny Tremain</h1>
+            <p class="subtitle">A Revolutionary Journey</p>
+        </header>
+
+        <!-- Start Screen -->
+        <div class="game-screen" id="startScreen">
+            <div class="welcome-box">
+                <h2>Boston, 1773</h2>
+                <p>You are Johnny Tremain, a 14-year-old apprentice silversmith in colonial Boston. Your journey will take you from pride to humility, from craft to cause, through the most pivotal moments leading to the American Revolution.</p>
+                <p><strong>Your story unfolds in 10 chapters:</strong></p>
+                <ul>
+                    <li>Navigate difficult choices and moral dilemmas</li>
+                    <li>Build relationships with historical figures</li>
+                    <li>Witness and participate in revolutionary events</li>
+                    <li>Transform from a boy to a patriot</li>
+                </ul>
+                <p class="instruction">Each round represents a key moment from Esther Forbes' classic novel. Your choices will shape Johnny's character and destiny.</p>
+                <button class="btn-primary" onclick="game.startGame()">Begin Your Journey</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="game-screen hidden" id="gameScreen">
+            <div class="status-bar">
+                <div class="stat">
+                    <span class="stat-label">Chapter:</span>
+                    <span class="stat-value" id="round">1</span>/10
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">Pride:</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill pride-fill" id="prideFill" style="width: 80%"></div>
+                    </div>
+                    <span class="stat-value" id="pride">80</span>
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">Humility:</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill humility-fill" id="humilityFill" style="width: 20%"></div>
+                    </div>
+                    <span class="stat-value" id="humility">20</span>
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">Patriotism:</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill patriotism-fill" id="patriotismFill" style="width: 30%"></div>
+                    </div>
+                    <span class="stat-value" id="patriotism">30</span>
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">Skills:</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill skills-fill" id="skillsFill" style="width: 85%"></div>
+                    </div>
+                    <span class="stat-value" id="skills">85</span>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="story-panel">
+                    <h2 id="chapterTitle">Chapter Title</h2>
+                    <div class="chapter-year" id="chapterYear">1773</div>
+                    <div class="story-text" id="storyText"></div>
+                </div>
+
+                <div class="relationships-panel">
+                    <h3>Key Relationships</h3>
+                    <div class="relationships-grid" id="relationships">
+                        <div class="relationship-item">
+                            <span class="person-name">Mr. Lapham:</span>
+                            <span class="relationship-value">Good</span>
+                        </div>
+                        <div class="relationship-item">
+                            <span class="person-name">Cilla Lapham:</span>
+                            <span class="relationship-value">Friendly</span>
+                        </div>
+                        <div class="relationship-item">
+                            <span class="person-name">Dove:</span>
+                            <span class="relationship-value">Hostile</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="choices-panel" id="choicesPanel">
+                    <h3>What will you do?</h3>
+                    <div class="choices" id="choices"></div>
+                </div>
+
+                <div class="result-panel hidden" id="resultPanel">
+                    <div class="result-text" id="resultText"></div>
+                    <button class="btn-advance" onclick="game.nextChapter()">Continue to Next Chapter →</button>
+                </div>
+
+                <div class="journal-panel">
+                    <h3>Johnny's Journal</h3>
+                    <div class="journal-entries" id="journalEntries">
+                        <div class="journal-entry">Your journey begins...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Screen -->
+        <div class="game-screen hidden" id="endScreen">
+            <div class="end-box">
+                <h2>April 19, 1775 - Lexington & Concord</h2>
+                <div id="endMessage"></div>
+                <div class="final-stats">
+                    <h3>Johnny's Character</h3>
+                    <p>Pride: <span id="finalPride"></span></p>
+                    <p>Humility: <span id="finalHumility"></span></p>
+                    <p>Patriotism: <span id="finalPatriotism"></span></p>
+                    <p>Skills: <span id="finalSkills"></span></p>
+                    <div class="character-assessment" id="characterAssessment"></div>
+                </div>
+                <button class="btn-primary" onclick="location.reload()">Experience the Journey Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="johnny-tremain.js"></script>
+</body>
+</html>

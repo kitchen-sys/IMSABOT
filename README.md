@@ -1,8 +1,20 @@
-# John Hancock's Trading Empire
+# IMSABOT - Revolutionary Era Educational Games
 
-A historical web-based business simulation game set during the tumultuous years leading up to the American Revolution (1765-1775).
+Two immersive historical web-based games set during the American Revolution, designed for educational engagement and historical literacy.
 
-## Game Overview
+## Games
+
+### 1. John Hancock's Trading Empire
+A business simulation game set during 1765-1775, where you manage a colonial trading empire.
+
+### 2. Johnny Tremain: A Revolutionary Journey
+A narrative turn-based game following Johnny Tremain's transformation from apprentice silversmith to patriot, based on Esther Forbes' classic novel.
+
+---
+
+## John Hancock's Trading Empire
+
+### Game Overview
 
 Step into the shoes of John Hancock, one of the wealthiest merchants in colonial Boston. Navigate 10 historical events while managing your trading empire, making shrewd business decisions, and balancing profit with patriotism.
 
@@ -122,6 +134,109 @@ Developed as an educational historical simulation game. All historical events ar
 ## License
 
 Open source - feel free to use for educational purposes.
+
+---
+
+## Johnny Tremain: A Revolutionary Journey
+
+### Game Overview
+
+Experience the American Revolution through the eyes of Johnny Tremain, a 14-year-old apprentice silversmith whose life is transformed by a tragic accident. This narrative-driven turn-based game follows Johnny's journey through 10 chapters, each representing a key moment from Esther Forbes' beloved historical novel.
+
+### Gameplay Features
+
+#### Character Development System
+- **Pride**: Johnny's arrogance and self-importance
+- **Humility**: His capacity for growth and learning from mistakes
+- **Patriotism**: His commitment to the revolutionary cause
+- **Skills**: His abilities and adaptability despite his injury
+
+Each choice you make affects these character traits, shaping Johnny's development throughout the story.
+
+#### Relationship Tracking
+Build or damage relationships with historical and fictional characters:
+- **Cilla Lapham**: The silversmith's granddaughter who cares for Johnny
+- **Rab Silsbee**: The printer's apprentice who becomes Johnny's mentor
+- **Paul Revere**: The master silversmith and patriot
+- **Dr. Joseph Warren**: Physician and revolutionary leader
+- **Sam Adams**: The firebrand organizer of resistance
+
+### The 10 Chapters
+
+1. **The Silver Shop** (July 1773): Johnny's pride as a talented apprentice
+2. **The Burned Hand** (July 1773): The accident that changes everything
+3. **Cast Out** (August 1773): Struggling to find work with an injured hand
+4. **The Boston Observer** (September 1773): Finding new purpose as a delivery boy
+5. **Sons of Liberty** (November 1773): Meeting the patriots who will change history
+6. **The Boston Tea Party** (December 1773): Participating in the famous protest
+7. **British Occupation** (Summer 1774): Life under military rule
+8. **Pumpkin's Choice** (Winter 1774-1775): Moral dilemmas of war
+9. **War Preparations** (March 1775): The colonies arm for conflict
+10. **Lexington and Concord** (April 1775): The first shots of the Revolution
+
+### How to Play
+
+1. Open `johnny-tremain.html` in any modern web browser
+2. Read the introduction and click "Begin Your Journey"
+3. Experience each chapter's story
+4. Make difficult choices that reflect Johnny's character
+5. Watch how your decisions shape his relationships and traits
+6. Complete all 10 chapters to see Johnny's final character assessment
+
+### Educational Value
+
+Players learn about:
+- The daily life of colonial apprentices
+- The social structure of pre-Revolutionary Boston
+- Key events leading to the American Revolution
+- Character development through adversity
+- Moral complexity of revolutionary action
+- Historical figures and their roles in independence
+
+### Themes Explored
+
+- **Pride vs. Humility**: Johnny's transformation from arrogant apprentice to humble patriot
+- **Personal Loss**: How tragedy can reshape identity and purpose
+- **Coming of Age**: Growing up during revolutionary times
+- **Sacrifice**: What individuals give for a greater cause
+- **Friendship**: Rab's mentorship and its impact on Johnny
+- **Liberty**: Understanding what freedom truly means
+
+### Technical Details
+
+#### Files
+- `johnny-tremain.html` - Game structure and narrative
+- `johnny-tremain.css` - Colonial-themed styling with character-focused design
+- `johnny-tremain.js` - Narrative engine and choice system
+
+#### Technologies
+- Pure vanilla JavaScript (no frameworks required)
+- HTML5 and CSS3
+- Responsive design for desktop and mobile
+- Dynamic stat tracking and relationship management
+
+### Historical and Literary Accuracy
+
+This game faithfully follows Esther Forbes' 1943 Newbery Medal-winning novel "Johnny Tremain," which remains one of the most acclaimed works of historical fiction for young readers.
+
+- **Historical Events**: All major events (Boston Tea Party, Lexington & Concord, etc.) are historically accurate
+- **Historical Figures**: Paul Revere, Dr. Warren, and Sam Adams are portrayed based on historical records
+- **Setting**: Pre-Revolutionary Boston is depicted with attention to detail
+- **Themes**: The novel's themes of pride, humility, and patriotism are central to gameplay
+
+### Character Assessment System
+
+At the end of the game, players receive a detailed assessment of Johnny's character development based on their choices throughout the 10 chapters. Multiple endings are possible depending on the path taken.
+
+---
+
+## Getting Started
+
+Choose your adventure:
+- **Economic Strategy**: Play John Hancock's Trading Empire (`index.html`)
+- **Narrative Journey**: Play Johnny Tremain (`johnny-tremain.html`)
+
+Both games run entirely in your web browser with no installation required!
 
 ---
 

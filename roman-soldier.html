@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legions of Gaul: A Roman Conquest</title>
+    <link rel="stylesheet" href="roman-soldier.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Legions of Gaul</h1>
+            <p class="subtitle">A Roman Conquest</p>
+        </header>
+
+        <!-- Start Screen -->
+        <div class="game-screen" id="startScreen">
+            <div class="welcome-box">
+                <h2>Gaul, 58 BCE</h2>
+                <p class="intro-text">You are a young legionary in Julius Caesar's army, embarking on the conquest of Gaul. Through 20 battles across the Gallic territories, you will fight for glory, find legendary equipment, forge bonds with your fellow soldiers, and prove your knowledge of Roman history.</p>
+
+                <div class="historical-context">
+                    <h3>Historical Context</h3>
+                    <p>The Gallic Wars (58-50 BCE) were a series of military campaigns waged by Julius Caesar against various Gallic tribes. These campaigns extended Rome's territory to the English Channel and the Rhine, and resulted in the first Roman invasion of Britain.</p>
+
+                    <p>As a legionary, you are part of the most disciplined and effective military force of the ancient world. Your success depends on your combat prowess, your equipment, and your knowledge of Roman history and tactics.</p>
+
+                    <p><strong>Game Features:</strong></p>
+                    <ul>
+                        <li>20 rounds of intense battles across Gaul</li>
+                        <li>Historical trivia questions that affect battle outcomes</li>
+                        <li>Equipment system with rarities from Common to Mythic</li>
+                        <li>Legendary items named after Roman heroes and gods</li>
+                        <li>Relationships with fellow soldiers that provide bonuses</li>
+                        <li>Strategic choices that shape your journey</li>
+                    </ul>
+
+                    <p class="instruction"><em>"Veni, Vidi, Vici" — I came, I saw, I conquered</em></p>
+                </div>
+
+                <button class="btn-primary" onclick="game.startGame()">Join the Legion</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="game-screen hidden" id="gameScreen">
+            <div class="status-bar">
+                <div class="stat">
+                    <span class="stat-label">Battle:</span>
+                    <span class="stat-value" id="round">1</span>/20
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">Health:</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill health-fill" id="healthFill" style="width: 100%"></div>
+                    </div>
+                    <span class="stat-value" id="health">100</span>
+                </div>
+                <div class="stat-tooltip">
+                    <span class="stat-label">Honor:</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill honor-fill" id="honorFill" style="width: 100%"></div>
+                    </div>
+                    <span class="stat-value" id="honor">50</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Level:</span>
+                    <span class="stat-value" id="level">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Gold:</span>
+                    <span class="stat-value" id="gold">100</span>
+                </div>
+            </div>
+
+            <!-- Equipment Display -->
+            <div class="equipment-panel">
+                <h3>Equipment</h3>
+                <div class="equipment-grid">
+                    <div class="equipment-slot" id="helmetSlot">
+                        <span class="equipment-label">Helmet:</span>
+                        <span class="equipment-item common" id="helmet">Iron Helmet</span>
+                    </div>
+                    <div class="equipment-slot" id="chestSlot">
+                        <span class="equipment-label">Chest:</span>
+                        <span class="equipment-item common" id="chest">Leather Cuirass</span>
+                    </div>
+                    <div class="equipment-slot" id="legsSlot">
+                        <span class="equipment-label">Legs:</span>
+                        <span class="equipment-item common" id="legs">Simple Greaves</span>
+                    </div>
+                    <div class="equipment-slot" id="weaponSlot">
+                        <span class="equipment-label">Weapon:</span>
+                        <span class="equipment-item common" id="weapon">Gladius</span>
+                    </div>
+                    <div class="equipment-slot" id="shieldSlot">
+                        <span class="equipment-label">Shield:</span>
+                        <span class="equipment-item common" id="shield">Wooden Scutum</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Companions Display -->
+            <div class="companions-panel">
+                <h3>Companions</h3>
+                <div class="companions-grid" id="companionsGrid"></div>
+            </div>
+
+            <div class="main-content">
+                <div class="story-panel">
+                    <h2 id="battleTitle">Battle Title</h2>
+                    <div class="battle-info">
+                        <span class="battle-location" id="battleLocation">Location</span>
+                    </div>
+                    <div class="story-text" id="storyText"></div>
+                </div>
+
+                <!-- Question Panel -->
+                <div class="question-panel hidden" id="questionPanel">
+                    <h3>Test Your Knowledge!</h3>
+                    <p class="question-intro">Answer these historical questions to determine your battle performance:</p>
+                    <div class="question-container" id="questionContainer"></div>
+                    <button class="btn-primary" id="submitAnswers" onclick="game.submitAnswers()">Enter Battle!</button>
+                </div>
+
+                <!-- Battle Result Panel -->
+                <div class="result-panel hidden" id="resultPanel">
+                    <div class="result-text" id="resultText"></div>
+                    <div class="loot-panel hidden" id="lootPanel">
+                        <h3>Spoils of War</h3>
+                        <div id="lootItems"></div>
+                    </div>
+                    <button class="btn-continue" onclick="game.nextRound()">Continue Campaign</button>
+                </div>
+
+                <!-- Choice Panel -->
+                <div class="choices-panel hidden" id="choicesPanel">
+                    <h3>What will you do?</h3>
+                    <div class="choices" id="choices"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Screen -->
+        <div class="game-screen hidden" id="endScreen">
+            <div class="end-box">
+                <h2>The Campaign Ends</h2>
+                <div id="endingText" class="ending-text"></div>
+
+                <div class="final-stats">
+                    <h3>Your Legacy</h3>
+                    <div class="stat-row">
+                        <span>Final Level:</span>
+                        <span id="finalLevel">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Honor Earned:</span>
+                        <span id="finalHonor">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Gold Accumulated:</span>
+                        <span id="finalGold">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Questions Answered Correctly:</span>
+                        <span id="finalCorrect">0</span>/<span id="finalTotal">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Legendary Items Found:</span>
+                        <span id="finalLegendary">0</span>
+                    </div>
+                </div>
+
+                <div class="final-equipment">
+                    <h3>Final Equipment</h3>
+                    <div id="finalEquipment"></div>
+                </div>
+
+                <div class="historical-truth">
+                    <h3>Historical Reflection</h3>
+                    <p><strong>The Gallic Wars (58-50 BCE):</strong> Julius Caesar's conquest of Gaul was one of the most significant military campaigns in Roman history. It resulted in the deaths of an estimated 1 million Gauls and the enslavement of another million.</p>
+
+                    <p><strong>The Roman Legion:</strong> At its height, a Roman legion consisted of about 5,000 heavily armed infantry. Legionaries were professional soldiers who served for 25 years, receiving training, equipment, and a pension upon retirement.</p>
+
+                    <p><strong>Impact:</strong> The conquest of Gaul secured Rome's northern frontier, brought immense wealth to Rome, and established Caesar as the most powerful man in the Republic. It also set the stage for the Roman Civil War and the end of the Roman Republic.</p>
+
+                    <p><strong>Legacy:</strong> The Romanization of Gaul profoundly shaped European history. Modern France, Belgium, and parts of Germany, Switzerland, and the Netherlands still bear the cultural and linguistic marks of Roman conquest.</p>
+                </div>
+
+                <button class="btn-primary" onclick="location.reload()">Begin New Campaign</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="roman-soldier.js"></script>
+</body>
+</html>

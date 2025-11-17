@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Washington's French and Indian War - 1753-1758</title>
+    <link rel="stylesheet" href="washington.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Washington's War</h1>
+            <p class="subtitle">The French and Indian War - 1753-1758</p>
+        </header>
+
+        <div class="game-screen" id="startScreen">
+            <div class="welcome-box">
+                <h2>Colonel George Washington</h2>
+                <p>The year is 1753. You are a young George Washington, about to embark on a perilous journey through the Ohio Valley that will shape your military career and the fate of the British colonies.</p>
+                <p><strong>Your Mission:</strong></p>
+                <ul>
+                    <li>Lead colonial forces against French expansion</li>
+                    <li>Manage troops, supplies, and morale</li>
+                    <li>Make critical tactical decisions in battle</li>
+                    <li>Build your reputation as a military leader</li>
+                    <li>Navigate 10 turns of historical events and battles</li>
+                </ul>
+                <p class="historical-note">⚔️ Based on actual events from George Washington's service in the French and Indian War</p>
+                <button class="btn-primary" onclick="game.startGame()">Begin Your Campaign</button>
+            </div>
+        </div>
+
+        <div class="game-screen hidden" id="gameScreen">
+            <div class="status-bar">
+                <div class="stat">
+                    <span class="stat-label">Turn:</span>
+                    <span class="stat-value" id="round">1</span>/10
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Season/Year:</span>
+                    <span class="stat-value" id="period">Winter 1753</span>
+                </div>
+                <div class="stat troops">
+                    <span class="stat-label">👥 Troops:</span>
+                    <span class="stat-value" id="troops">100</span>
+                </div>
+                <div class="stat supplies">
+                    <span class="stat-label">📦 Supplies:</span>
+                    <span class="stat-value" id="supplies">100</span>
+                </div>
+                <div class="stat morale">
+                    <span class="stat-label">⚔️ Morale:</span>
+                    <span class="stat-value" id="morale">75</span>%
+                </div>
+                <div class="stat reputation">
+                    <span class="stat-label">🎖️ Reputation:</span>
+                    <span class="stat-value" id="reputation">50</span>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="event-panel">
+                    <h2 id="eventTitle">Historical Event</h2>
+                    <div class="event-description" id="eventDescription"></div>
+                    <div class="situation-report" id="situationReport"></div>
+                </div>
+
+                <div class="decision-panel" id="decisionPanel">
+                    <h3>Your Decision</h3>
+                    <p class="decision-prompt" id="decisionPrompt">What will you do?</p>
+                    <div class="decision-buttons" id="decisionButtons">
+                        <!-- Decision buttons will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="intel-panel">
+                    <h3>Intelligence Report</h3>
+                    <div class="intel-grid">
+                        <div class="intel-item">
+                            <span class="intel-label">Enemy Forces:</span>
+                            <span class="intel-value" id="enemyForces">Unknown</span>
+                        </div>
+                        <div class="intel-item">
+                            <span class="intel-label">Terrain:</span>
+                            <span class="intel-value" id="terrain">Wilderness</span>
+                        </div>
+                        <div class="intel-item">
+                            <span class="intel-label">Weather:</span>
+                            <span class="intel-value" id="weather">Fair</span>
+                        </div>
+                        <div class="intel-item">
+                            <span class="intel-label">Native Relations:</span>
+                            <span class="intel-value" id="nativeRelations">Neutral</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="log-panel">
+                    <h3>Campaign Log</h3>
+                    <div class="log-messages" id="logMessages">
+                        <div class="log-entry">Your campaign begins, Colonel Washington...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-screen hidden" id="endScreen">
+            <div class="end-box">
+                <h2 id="endTitle">Campaign Complete!</h2>
+                <div id="endMessage"></div>
+                <div class="final-stats">
+                    <h3>Final Statistics</h3>
+                    <p>Remaining Troops: <span id="finalTroops"></span></p>
+                    <p>Final Morale: <span id="finalMorale"></span>%</p>
+                    <p>Final Reputation: <span id="finalReputation"></span></p>
+                    <p>Battles Won: <span id="battlesWon"></span></p>
+                    <p>Overall Grade: <span id="finalGrade"></span></p>
+                </div>
+                <div class="historical-outcome">
+                    <h3>Historical Context</h3>
+                    <p id="historicalContext"></p>
+                </div>
+                <button class="btn-primary" onclick="location.reload()">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="washington.js"></script>
+</body>
+</html>

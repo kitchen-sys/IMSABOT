@@ -794,10 +794,16 @@ const game = {
                     <div class="loot-name ${item.rarity}">${item.name}</div>
                     <div class="loot-stats">+${item.power} Power | ${item.rarity.toUpperCase()}</div>
                 </div>
-                <button class="btn-equip" onclick="game.equipItem('${item.slot}', ${index}, '${item.name}', '${item.rarity}', ${item.power})">
+                <button class="btn-equip" data-item-index="${index}">
                     Equip
                 </button>
             `;
+
+            // Attach event listener properly to avoid apostrophe issues
+            const equipBtn = lootDiv.querySelector('.btn-equip');
+            equipBtn.addEventListener('click', () => {
+                game.equipItem(item.slot, index, item.name, item.rarity, item.power);
+            });
 
             lootItems.appendChild(lootDiv);
         });
@@ -851,18 +857,22 @@ const game = {
             power: power
         };
 
-        // Track legendary items
-        if (rarity === 'legendary' || rarity === 'mythic') {
+        // Track legendary items (only increment if not already tracked)
+        if ((rarity === 'legendary' || rarity === 'mythic') && oldItem.rarity !== 'legendary' && oldItem.rarity !== 'mythic') {
             this.legendaryItemsFound++;
         }
 
         this.updateDisplay();
 
-        // Remove the loot item button
+        // Update the equip button for this item
         const lootItems = document.getElementById('lootItems');
-        lootItems.children[index].querySelector('.btn-equip').textContent = 'Equipped!';
-        lootItems.children[index].querySelector('.btn-equip').disabled = true;
+        const button = lootItems.children[index].querySelector('.btn-equip');
+        button.textContent = 'Equipped!';
+        button.disabled = true;
+        button.style.opacity = '0.5';
+        button.style.cursor = 'not-allowed';
 
+        // Show feedback
         alert(`Equipped ${name}! (${oldItem.name} replaced)`);
     },
 

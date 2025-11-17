@@ -11,6 +11,7 @@
         <header>
             <h1>John Hancock's Trading Empire</h1>
             <p class="subtitle">Build your fortune before the Revolution</p>
+            <button class="vocab-btn" onclick="game.showVocabulary()">📚 Historical Vocabulary</button>
         </header>
 
         <div class="game-screen" id="startScreen">
@@ -175,6 +176,137 @@
                 <p class="warning">⚠️ Smuggling is profitable but risky! You may be caught by British customs.</p>
                 <div id="smuggleOptions"></div>
                 <button class="btn-secondary" onclick="game.closeModal()">Cancel</button>
+            </div>
+        </div>
+
+        <div class="modal hidden" id="vocabularyModal">
+            <div class="modal-content vocab-modal">
+                <h3>Historical Vocabulary (1765-1775)</h3>
+                <p style="font-style: italic; margin-bottom: 20px;">Learn the key terms from the Revolutionary Era</p>
+
+                <div class="vocab-grid">
+                    <div class="vocab-term">
+                        <h4>Patriot</h4>
+                        <p>A colonist who supported independence from Britain and opposed British taxation.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Loyalist (Tory)</h4>
+                        <p>A colonist who remained loyal to the British Crown during the Revolution.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Smuggling</h4>
+                        <p>Illegal importation of goods to avoid British taxes and trade restrictions.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Boycott</h4>
+                        <p>A coordinated refusal to buy British goods as protest against taxation.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Stamp Act (1765)</h4>
+                        <p>British law requiring colonists to pay tax on printed materials through special stamps.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Townshend Acts (1767)</h4>
+                        <p>Laws imposing duties on imported goods like tea, glass, and paper.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Sons of Liberty</h4>
+                        <p>Secret organization of patriots who organized resistance to British policies.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Customs</h4>
+                        <p>British officials who collected taxes on imported goods and enforced trade laws.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Duties</h4>
+                        <p>Taxes imposed on imported or exported goods.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>East India Company</h4>
+                        <p>British trading company granted monopoly on tea sales to colonies in 1773.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Intolerable Acts (1774)</h4>
+                        <p>Punitive laws closing Boston Harbor and restricting colonial self-government.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Continental Congress</h4>
+                        <p>Assembly of delegates from colonies to coordinate resistance to Britain.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Minutemen</h4>
+                        <p>Colonial militia ready to fight at a minute's notice.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Merchant</h4>
+                        <p>A trader who buys and sells goods for profit, often owning ships and warehouses.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Embargo</h4>
+                        <p>Official ban on trade with a particular country or region.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Parliament</h4>
+                        <p>British legislative body that passed taxes and laws affecting the colonies.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Redcoats</h4>
+                        <p>Nickname for British soldiers due to their distinctive red uniforms.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Liberty</h4>
+                        <p>Freedom from oppressive rule; central ideal of the American Revolution.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Taxation Without Representation</h4>
+                        <p>Colonial complaint that they were taxed by Parliament without having representatives there.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Whaling</h4>
+                        <p>Important colonial industry hunting whales for oil used in lamps and manufacturing.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Molasses Act</h4>
+                        <p>Tax on molasses and sugar imported from non-British sources, widely evaded.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Committee of Correspondence</h4>
+                        <p>Network for sharing information about British actions between colonies.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Quartering</h4>
+                        <p>Requirement that colonists provide housing and supplies for British troops.</p>
+                    </div>
+
+                    <div class="vocab-term">
+                        <h4>Proclamation Line of 1763</h4>
+                        <p>British restriction on colonial settlement west of Appalachian Mountains.</p>
+                    </div>
+                </div>
+
+                <button class="btn-secondary" onclick="game.closeModal()" style="margin-top: 20px; width: 100%;">Close</button>
             </div>
         </div>
     </div>

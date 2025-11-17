@@ -43,6 +43,32 @@ header h1 {
     font-size: 1.1em;
 }
 
+.vocab-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #8b4513, #6b3410);
+    color: #f4ecd8;
+    border: 2px solid #5a2a0a;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-size: 0.9em;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.vocab-btn:hover {
+    background: linear-gradient(to bottom, #a05520, #8b4513);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+header {
+    position: relative;
+}
+
 .game-screen {
     padding: 20px;
 }
@@ -642,6 +668,48 @@ header h1 {
     50% { box-shadow: 0 6px 16px rgba(255, 215, 0, 0.6); }
 }
 
+/* Vocabulary Modal */
+.vocab-modal {
+    max-width: 900px !important;
+    max-height: 85vh;
+}
+
+.vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.vocab-term {
+    background: #fff;
+    padding: 15px;
+    border: 2px solid #8b4513;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+}
+
+.vocab-term:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-color: #1a3a52;
+}
+
+.vocab-term h4 {
+    color: #8b0000;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+    border-bottom: 2px solid #8b4513;
+    padding-bottom: 5px;
+}
+
+.vocab-term p {
+    color: #2c2416;
+    line-height: 1.5;
+    font-size: 0.95em;
+}
+
 /* Responsive Design */
 @media (max-width: 968px) {
     .main-content {
@@ -658,6 +726,17 @@ header h1 {
 
     header h1 {
         font-size: 1.8em;
+    }
+
+    .vocab-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vocab-btn {
+        position: static;
+        margin-top: 15px;
+        width: auto;
+        display: inline-block;
     }
 }
 

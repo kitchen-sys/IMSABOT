@@ -408,6 +408,11 @@ class TradingGame {
     closeModal() {
         document.getElementById('tradeModal').classList.add('hidden');
         document.getElementById('smuggleModal').classList.add('hidden');
+        document.getElementById('vocabularyModal').classList.add('hidden');
+    }
+
+    showVocabulary() {
+        document.getElementById('vocabularyModal').classList.remove('hidden');
     }
 
     addLog(message, type = '') {
@@ -622,11 +627,15 @@ const game = new TradingGame();
 window.onclick = function(event) {
     const tradeModal = document.getElementById('tradeModal');
     const smuggleModal = document.getElementById('smuggleModal');
+    const vocabularyModal = document.getElementById('vocabularyModal');
 
     if (event.target === tradeModal) {
         game.closeModal();
     }
     if (event.target === smuggleModal) {
+        game.closeModal();
+    }
+    if (event.target === vocabularyModal) {
         game.closeModal();
     }
 }

@@ -18,6 +18,7 @@ const game = {
     // Current battle state
     currentQuestions: [],
     playerAnswers: [],
+    askedQuestions: [], // Track which questions have been asked to prevent repeats
 
     // Equipment
     equipment: {
@@ -39,24 +40,28 @@ const game = {
     // Stats for achievements
     knowledgeScore: 0, // Total correct answers - visible progress metric
 
-    // Question Bank (30 questions about Rome) with educational explanations
+    // Question Bank (50 questions about Rome) with educational explanations and difficulty levels
     questionBank: [
+        // EASY QUESTIONS (Rounds 1-7)
         {
             question: "Who was the first Emperor of Rome?",
             answers: ["Julius Caesar", "Augustus"],
             correct: 1,
+            difficulty: "easy",
             explanation: "Augustus (formerly Octavian) became the first Roman Emperor in 27 BCE. Julius Caesar was a dictator but never held the title of Emperor. After Caesar's assassination, Augustus rose to power and transformed Rome from a Republic to an Empire."
         },
         {
             question: "What year was Rome traditionally founded?",
             answers: ["753 BCE", "509 BCE"],
             correct: 0,
+            difficulty: "easy",
             explanation: "According to legend, Rome was founded in 753 BCE by Romulus, who became its first king. The year 509 BCE marks when Rome became a Republic after overthrowing its last king."
         },
         {
             question: "The Roman military formation was called a:",
             answers: ["Phalanx", "Legion"],
             correct: 1,
+            difficulty: "easy",
             explanation: "A Roman legion was a large military unit of about 5,000 soldiers. The phalanx was used by Greeks. Roman legions were more flexible and effective than the rigid Greek phalanx formation."
         },
         {
@@ -412,6 +417,7 @@ const game = {
         this.correctAnswers = 0;
         this.legendaryItemsFound = 0;
         this.knowledgeScore = 0; // Reset knowledge score
+        this.askedQuestions = []; // Reset asked questions
 
         // Reset equipment
         this.equipment = {
@@ -521,15 +527,48 @@ const game = {
         this.generateQuestions();
     },
 
-    // Generate random questions for battle
+    // Generate random questions for battle (with difficulty scaling and no repeats)
     generateQuestions() {
-        // Select 3-5 random questions based on round difficulty
+        //Select 3-5 random questions based on round difficulty
         const numQuestions = Math.min(3 + Math.floor(this.currentRound / 5), 5);
 
-        // Shuffle question bank
-        const shuffled = [...this.questionBank].sort(() => Math.random() - 0.5);
+        // Determine difficulty based on round
+        let difficulty = "easy";
+        if (this.currentRound >= 14) difficulty = "hard";
+        else if (this.currentRound >= 8) difficulty = "medium";
+
+        // Filter questions by difficulty and exclude already asked questions
+        let availableQuestions = this.questionBank.filter(q => {
+            const matchesDifficulty = !q.difficulty || q.difficulty === difficulty;
+            const notAsked = !this.askedQuestions.includes(this.questionBank.indexOf(q));
+            return matchesDifficulty && notAsked;
+        });
+
+        // If not enough questions, include other difficulties
+        if (availableQuestions.length < numQuestions) {
+            availableQuestions = this.questionBank.filter(q =>
+                !this.askedQuestions.includes(this.questionBank.indexOf(q))
+            );
+        }
+
+        // If all questions asked, reset
+        if (availableQuestions.length < numQuestions) {
+            this.askedQuestions = [];
+            availableQuestions = this.questionBank;
+        }
+
+        // Shuffle and select questions
+        const shuffled = [...availableQuestions].sort(() => Math.random() - 0.5);
         this.currentQuestions = shuffled.slice(0, numQuestions);
         this.playerAnswers = new Array(numQuestions).fill(-1);
+
+        // Mark questions as asked
+        this.currentQuestions.forEach(q => {
+            const index = this.questionBank.indexOf(q);
+            if (index !== -1 && !this.askedQuestions.includes(index)) {
+                this.askedQuestions.push(index);
+            }
+        });
 
         // Display questions
         const container = document.getElementById('questionContainer');
@@ -876,6 +915,114 @@ const game = {
         alert(`Equipped ${name}! (${oldItem.name} replaced)`);
     },
 
+    // Shop System
+    showShop() {
+        const modal = document.getElementById('shopModal');
+        const shopItems = document.getElementById('shopItems');
+        const shopGold = document.getElementById('shopGold');
+
+        shopGold.textContent = this.gold;
+        modal.classList.remove('hidden');
+
+        // Generate shop items
+        shopItems.innerHTML = '';
+        const slots = ['helmet', 'chest', 'legs', 'weapon', 'shield'];
+
+        slots.forEach(slot => {
+            // Offer items one rarity better than current
+            const currentRarity = this.equipment[slot].rarity;
+            let targetRarity = 'uncommon';
+            let price = 50;
+
+            if (currentRarity === 'uncommon') { targetRarity = 'rare'; price = 150; }
+            else if (currentRarity === 'rare') { targetRarity = 'epic'; price = 300; }
+            else if (currentRarity === 'epic') { targetRarity = 'legendary'; price = 600; }
+            else if (currentRarity === 'legendary') { targetRarity = 'mythic'; price = 1200; }
+
+            const pool = this.equipmentPools[slot][targetRarity];
+            if (pool && pool.length > 0) {
+                const item = pool[Math.floor(Math.random() * pool.length)];
+
+                const shopItem = document.createElement('div');
+                shopItem.className = 'shop-item';
+                shopItem.innerHTML = `
+                    <div class="shop-item-name ${targetRarity}">${item.name}</div>
+                    <div class="shop-item-stats">+${item.power} Power</div>
+                    <div class="shop-item-stats">${targetRarity.toUpperCase()}</div>
+                    <div class="shop-item-price">${price} Gold</div>
+                    <button class="btn-buy" ${this.gold < price ? 'disabled' : ''} data-buy-item>
+                        ${this.gold < price ? 'Not Enough Gold' : 'Buy'}
+                    </button>
+                `;
+
+                // Attach event listener to avoid apostrophe issues
+                const buyBtn = shopItem.querySelector('[data-buy-item]');
+                if (!buyBtn.disabled) {
+                    buyBtn.addEventListener('click', () => {
+                        game.buyItem(slot, item.name, targetRarity, item.power, price);
+                    });
+                }
+
+                shopItems.appendChild(shopItem);
+            }
+        });
+    },
+
+    buyItem(slot, name, rarity, power, price) {
+        if (this.gold < price) return;
+
+        this.gold -= price;
+        this.equipment[slot] = { name, rarity, power };
+
+        this.updateDisplay();
+        alert(`Purchased ${name} for ${price} gold!`);
+
+        // Refresh shop
+        this.showShop();
+    },
+
+    closeShop() {
+        document.getElementById('shopModal').classList.add('hidden');
+    },
+
+    // Companion Theft Mechanic
+    checkCompanionTheft() {
+        // Check if any companion has very low relationship
+        const distrustfulCompanions = this.companions.filter(c => c.relationship < 20);
+
+        if (distrustfulCompanions.length > 0 && Math.random() < 0.3) {
+            const thief = distrustfulCompanions[Math.floor(Math.random() * distrustfulCompanions.length)];
+
+            // Steal a random equipped item
+            const slots = ['helmet', 'chest', 'legs', 'weapon', 'shield'];
+            const stealableSlots = slots.filter(slot => {
+                return this.equipment[slot].rarity !== 'common'; // Don't steal common items
+            });
+
+            if (stealableSlots.length > 0) {
+                const stolenSlot = stealableSlots[Math.floor(Math.random() * stealableSlots.length)];
+                const stolenItem = this.equipment[stolenSlot];
+
+                // Replace with common item
+                const commonPool = this.equipmentPools[stolenSlot].common;
+                const replacement = commonPool[Math.floor(Math.random() * commonPool.length)];
+                this.equipment[stolenSlot] = { ...replacement, rarity: 'common' };
+
+                // Show theft message
+                alert(`⚠️ ${thief.name} has betrayed you! Due to low trust, they stole your ${stolenItem.name} and fled in the night!`);
+
+                // Remove companion
+                this.companions = this.companions.filter(c => c.name !== thief.name);
+
+                this.updateDisplay();
+                this.displayCompanions();
+
+                return true;
+            }
+        }
+        return false;
+    },
+
     // Story events for education (IMPROVEMENT 3)
     storyEvents: [
         {
@@ -1041,6 +1188,19 @@ Titus adds: "The Gauls worship their own gods in sacred groves, led by druids. C
             return;
         }
 
+        // Check for companion theft before continuing
+        if (this.checkCompanionTheft()) {
+            // Theft occurred, slight delay before next round
+            setTimeout(() => {
+                this.continueToNextRound();
+            }, 1000);
+            return;
+        }
+
+        this.continueToNextRound();
+    },
+
+    continueToNextRound() {
         // Heal a bit between battles
         this.health = Math.min(this.maxHealth, this.health + 10);
 

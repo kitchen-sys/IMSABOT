@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Hancock's Trading Empire - 1765-1775</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>John Hancock's Trading Empire</h1>
+            <p class="subtitle">Build your fortune before the Revolution</p>
+        </header>
+
+        <div class="game-screen" id="startScreen">
+            <div class="welcome-box">
+                <h2>Welcome, Mr. Hancock</h2>
+                <p>The year is 1765. You've inherited your uncle Thomas Hancock's prosperous trading business in Boston. Navigate the turbulent years leading to revolution while building your commercial empire.</p>
+                <p><strong>Your Goals:</strong></p>
+                <ul>
+                    <li>Maximize profits through smart trading</li>
+                    <li>Navigate British taxes and regulations</li>
+                    <li>Balance legal trade with profitable smuggling</li>
+                    <li>Maintain your reputation among colonists</li>
+                </ul>
+                <button class="btn-primary" onclick="game.startGame()">Begin Your Empire</button>
+            </div>
+        </div>
+
+        <div class="game-screen hidden" id="gameScreen">
+            <div class="status-bar">
+                <div class="stat">
+                    <span class="stat-label">Round:</span>
+                    <span class="stat-value" id="round">1</span>/10
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Year:</span>
+                    <span class="stat-value" id="year">1765</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Treasury:</span>
+                    <span class="stat-value" id="money">£10,000</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Reputation:</span>
+                    <span class="stat-value" id="reputation">75</span>%
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Fleet Size:</span>
+                    <span class="stat-value" id="ships">3</span>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="event-panel">
+                    <h2 id="eventTitle">Historical Event</h2>
+                    <div class="event-description" id="eventDescription"></div>
+                    <div class="economic-impact" id="economicImpact"></div>
+                </div>
+
+                <div class="market-panel">
+                    <h3>Market Prices <span class="pulse" id="priceUpdate"></span></h3>
+                    <div class="price-ticker">
+                        <div class="commodity" id="teaPrice">
+                            <span class="commodity-name">Tea</span>
+                            <span class="price">£<span id="teaPriceValue">50</span></span>
+                            <span class="trend" id="teaTrend">●</span>
+                        </div>
+                        <div class="commodity" id="rumPrice">
+                            <span class="commodity-name">Rum</span>
+                            <span class="price">£<span id="rumPriceValue">30</span></span>
+                            <span class="trend" id="rumTrend">●</span>
+                        </div>
+                        <div class="commodity" id="whaleOilPrice">
+                            <span class="commodity-name">Whale Oil</span>
+                            <span class="price">£<span id="whaleOilPriceValue">80</span></span>
+                            <span class="trend" id="whaleOilTrend">●</span>
+                        </div>
+                        <div class="commodity" id="textilesPrice">
+                            <span class="commodity-name">Textiles</span>
+                            <span class="price">£<span id="textilesPriceValue">60</span></span>
+                            <span class="trend" id="textilesTrend">●</span>
+                        </div>
+                        <div class="commodity" id="furniturePrice">
+                            <span class="commodity-name">Furniture</span>
+                            <span class="price">£<span id="furniturePriceValue">100</span></span>
+                            <span class="trend" id="furnitureTrend">●</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inventory-panel">
+                    <h3>Your Warehouse</h3>
+                    <div class="inventory-grid">
+                        <div class="inventory-item">
+                            <span class="item-name">Tea:</span>
+                            <span class="item-qty" id="teaQty">10</span>
+                        </div>
+                        <div class="inventory-item">
+                            <span class="item-name">Rum:</span>
+                            <span class="item-qty" id="rumQty">15</span>
+                        </div>
+                        <div class="inventory-item">
+                            <span class="item-name">Whale Oil:</span>
+                            <span class="item-qty" id="whaleOilQty">5</span>
+                        </div>
+                        <div class="inventory-item">
+                            <span class="item-name">Textiles:</span>
+                            <span class="item-qty" id="textilesQty">8</span>
+                        </div>
+                        <div class="inventory-item">
+                            <span class="item-name">Furniture:</span>
+                            <span class="item-qty" id="furnitureQty">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-panel">
+                    <h3>Business Actions</h3>
+                    <div class="action-buttons">
+                        <button class="btn-action" onclick="game.showTradeDialog('buy')">
+                            Buy Goods
+                        </button>
+                        <button class="btn-action" onclick="game.showTradeDialog('sell')">
+                            Sell Goods
+                        </button>
+                        <button class="btn-action" onclick="game.showSmuggleDialog()">
+                            Smuggle Goods <span class="risky">(Risky)</span>
+                        </button>
+                        <button class="btn-action" onclick="game.showShipDialog()">
+                            Buy Ship (£2,000)
+                        </button>
+                        <button class="btn-action btn-advance" onclick="game.advanceRound()">
+                            Advance to Next Event →
+                        </button>
+                    </div>
+                </div>
+
+                <div class="log-panel">
+                    <h3>Activity Log</h3>
+                    <div class="log-messages" id="logMessages">
+                        <div class="log-entry">Welcome to your trading empire, Mr. Hancock!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-screen hidden" id="endScreen">
+            <div class="end-box">
+                <h2 id="endTitle">The Revolution Begins!</h2>
+                <div id="endMessage"></div>
+                <div class="final-stats">
+                    <h3>Final Statistics</h3>
+                    <p>Final Treasury: <span id="finalMoney"></span></p>
+                    <p>Final Reputation: <span id="finalReputation"></span></p>
+                    <p>Fleet Size: <span id="finalShips"></span> ships</p>
+                    <p>Total Profit: <span id="totalProfit"></span></p>
+                </div>
+                <button class="btn-primary" onclick="location.reload()">Play Again</button>
+            </div>
+        </div>
+
+        <div class="modal hidden" id="tradeModal">
+            <div class="modal-content">
+                <h3 id="tradeModalTitle">Trade Goods</h3>
+                <div id="tradeOptions"></div>
+                <button class="btn-secondary" onclick="game.closeModal()">Cancel</button>
+            </div>
+        </div>
+
+        <div class="modal hidden" id="smuggleModal">
+            <div class="modal-content">
+                <h3>Smuggling Operation</h3>
+                <p class="warning">⚠️ Smuggling is profitable but risky! You may be caught by British customs.</p>
+                <div id="smuggleOptions"></div>
+                <button class="btn-secondary" onclick="game.closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

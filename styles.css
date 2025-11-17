@@ -1,0 +1,528 @@
+/* Colonial-themed styling for John Hancock's Trading Empire */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: linear-gradient(135deg, #2c1810 0%, #1a0f08 100%);
+    color: #2c2416;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.game-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #f4ecd8;
+    border: 3px solid #8b4513;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+header {
+    background: linear-gradient(to bottom, #1a3a52, #0f2537);
+    color: #f4ecd8;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid #8b4513;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+    font-style: italic;
+    opacity: 0.9;
+    font-size: 1.1em;
+}
+
+.game-screen {
+    padding: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Welcome Screen */
+.welcome-box, .end-box {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 40px;
+    border: 2px solid #8b4513;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-box h2, .end-box h2 {
+    color: #1a3a52;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.welcome-box p, .end-box p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.welcome-box ul {
+    margin: 15px 0 25px 25px;
+    line-height: 1.8;
+}
+
+/* Status Bar */
+.status-bar {
+    display: flex;
+    justify-content: space-around;
+    background: #1a3a52;
+    color: #f4ecd8;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+/* Main Content Layout */
+.main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.event-panel {
+    grid-column: 1 / -1;
+    background: #fff;
+    padding: 20px;
+    border: 2px solid #8b4513;
+    border-radius: 5px;
+}
+
+.event-panel h2 {
+    color: #8b0000;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.event-description {
+    background: #fffaf0;
+    padding: 15px;
+    border-left: 4px solid #8b4513;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.economic-impact {
+    background: #fff3cd;
+    padding: 15px;
+    border-left: 4px solid #ffc107;
+    line-height: 1.6;
+}
+
+.economic-impact strong {
+    color: #856404;
+}
+
+/* Market Panel */
+.market-panel {
+    background: #fff;
+    padding: 20px;
+    border: 2px solid #8b4513;
+    border-radius: 5px;
+}
+
+.market-panel h3 {
+    color: #1a3a52;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pulse {
+    color: #dc3545;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.price-ticker {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.commodity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border-left: 4px solid #1a3a52;
+}
+
+.commodity-name {
+    font-weight: bold;
+    flex: 1;
+}
+
+.price {
+    font-size: 1.2em;
+    color: #155724;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.trend {
+    font-size: 1.5em;
+    width: 30px;
+    text-align: center;
+}
+
+.trend.up {
+    color: #28a745;
+}
+
+.trend.down {
+    color: #dc3545;
+}
+
+/* Inventory Panel */
+.inventory-panel {
+    background: #fff;
+    padding: 20px;
+    border: 2px solid #8b4513;
+    border-radius: 5px;
+}
+
+.inventory-panel h3 {
+    color: #1a3a52;
+    margin-bottom: 15px;
+}
+
+.inventory-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inventory-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.item-qty {
+    background: #1a3a52;
+    color: #ffd700;
+    padding: 2px 12px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+/* Action Panel */
+.action-panel {
+    grid-column: 1 / -1;
+    background: #fff;
+    padding: 20px;
+    border: 2px solid #8b4513;
+    border-radius: 5px;
+}
+
+.action-panel h3 {
+    color: #1a3a52;
+    margin-bottom: 15px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-action {
+    flex: 1;
+    min-width: 150px;
+    padding: 15px 20px;
+    background: #1a3a52;
+    color: #f4ecd8;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: Georgia, serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.btn-action:hover {
+    background: #2a4a62;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-advance {
+    background: #8b0000;
+    flex: 2;
+}
+
+.btn-advance:hover {
+    background: #a50000;
+}
+
+.risky {
+    color: #ffc107;
+    font-size: 0.85em;
+}
+
+/* Log Panel */
+.log-panel {
+    grid-column: 1 / -1;
+    background: #2c2416;
+    color: #f4ecd8;
+    padding: 20px;
+    border: 2px solid #8b4513;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.log-panel h3 {
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.log-messages {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.log-entry {
+    padding: 8px;
+    margin-bottom: 5px;
+    border-left: 3px solid #8b4513;
+    background: rgba(139, 69, 19, 0.2);
+    border-radius: 3px;
+    line-height: 1.4;
+}
+
+.log-entry.profit {
+    border-left-color: #28a745;
+    color: #90ee90;
+}
+
+.log-entry.loss {
+    border-left-color: #dc3545;
+    color: #ffb3b3;
+}
+
+.log-entry.warning {
+    border-left-color: #ffc107;
+    color: #ffe066;
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary {
+    padding: 15px 40px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: #8b0000;
+    color: #f4ecd8;
+}
+
+.btn-primary:hover {
+    background: #a50000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #f4ecd8;
+    padding: 30px;
+    border: 3px solid #8b4513;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content h3 {
+    color: #1a3a52;
+    margin-bottom: 20px;
+}
+
+.trade-option, .smuggle-option {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 2px solid #8b4513;
+    border-radius: 5px;
+}
+
+.trade-option h4, .smuggle-option h4 {
+    color: #8b0000;
+    margin-bottom: 10px;
+}
+
+.trade-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.trade-controls input {
+    flex: 1;
+    padding: 8px;
+    border: 2px solid #8b4513;
+    border-radius: 3px;
+    font-size: 1em;
+}
+
+.trade-controls button {
+    padding: 10px 20px;
+    background: #1a3a52;
+    color: #f4ecd8;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+}
+
+.trade-controls button:hover {
+    background: #2a4a62;
+}
+
+.warning {
+    color: #856404;
+    background: #fff3cd;
+    padding: 10px;
+    border-left: 4px solid #ffc107;
+    margin-bottom: 15px;
+}
+
+/* Final Stats */
+.final-stats {
+    background: #fff;
+    padding: 20px;
+    border: 2px solid #8b4513;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.final-stats h3 {
+    color: #1a3a52;
+    margin-bottom: 15px;
+}
+
+.final-stats p {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+.final-stats span {
+    font-weight: bold;
+    color: #8b0000;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .btn-action {
+        width: 100%;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .status-bar {
+        flex-direction: column;
+    }
+
+    .welcome-box, .end-box {
+        padding: 20px;
+    }
+}
